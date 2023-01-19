@@ -9,7 +9,7 @@ html body {
 
 body {
     margin: 0;
-    height: 100%;
+    height: 100vh;
 }
 
 *,
@@ -25,30 +25,43 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /* height: 100vh; */
     border: 2px solid red;
+    margin-top: 2rem;
 
 }
 
 .calcOutline {
     border: 2px solid black;
-    width: 350px;
-    height: 600px;
+    width: 305px;
+    height: 475px;
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
+    gap: 4px;
 }
 
 .displayOutput {
-    border: 2px solid green;
-    width: 346px;
+    border: 2px solid rgb(166, 166, 166);
+    width: 350px;
     height: 96px;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 42px;
+    align-items: center;
+    align-self: flex-start;
 }
 
 .clearButton,
 .lastTwo {
-    width: 86.5px;
-    height: 125px;
-    border: 1px solid blue;
+    width: 70px;
+    height: 78px;
+    border: 1px solid rgb(95, 95, 95);
+    word-wrap: break-word;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    border-radius: 2px;
 }

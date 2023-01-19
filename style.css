@@ -1,0 +1,54 @@
+html {
+    box-sizing: border-box;
+}
+
+html body {
+    font-family: 'Courier New', Courier, monospace;
+
+}
+
+body {
+    margin: 0;
+    height: 100%;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+
+
+.calcHolder {
+    /* border: 2px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    border: 2px solid red;
+
+}
+
+.calcOutline {
+    border: 2px solid black;
+    width: 350px;
+    height: 600px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.displayOutput {
+    border: 2px solid green;
+    width: 346px;
+    height: 96px;
+}
+
+.clearButton,
+.lastTwo {
+    width: 86.5px;
+    height: 125px;
+    border: 1px solid blue;
+}

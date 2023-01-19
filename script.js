@@ -1,3 +1,31 @@
+let display = document.querySelector('.displayOutput');
+let numberPad = document.querySelectorAll('.numberPad');
+let displayHolder = [];
+
+
+
+function numPadListen() {
+    numberPad.forEach(num => num.addEventListener('click', numInputHolder));
+    
+}
+
+function numInputHolder(event){
+    let value = +this.textContent;
+    const type = typeof value;
+    // console.log(+this.textContent);
+    // console.log(type);
+    displayHolder.push(value);
+    let noComma = +displayHolder.join("");
+    console.log(noComma.toLocaleString("en-US"));
+    display.textContent = `${noComma.toLocaleString("en-US")}`;
+
+}
+
+numPadListen();
+
+
+
+
 function add(...args) {
     const sum = args.reduce((previousValue, currentValue) => {
         return previousValue + currentValue;
@@ -56,4 +84,7 @@ function operate(symbol, numOne, numTwo) {
 
 }
 
-console.log(operate("-", 2, 4));
+
+
+
+// console.log(operate("-", 2, 4));

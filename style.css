@@ -53,8 +53,21 @@ body {
     align-self: flex-start;
 }
 
+/* 
 .clearButton,
 .lastTwo {
+    width: 70px;
+    height: 78px;
+    border: 1px solid rgb(95, 95, 95);
+    word-wrap: break-word;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    border-radius: 2px;
+} */
+
+button {
     width: 70px;
     height: 78px;
     border: 1px solid rgb(95, 95, 95);

@@ -35,4 +35,25 @@ function divide(...args) {
 
 }
 
-console.log(divide(0, 2));
+function operate(symbol, numOne, numTwo) {
+    switch (symbol) {
+        case "+":
+            const addResult = add(numOne, numTwo);
+            return addResult;
+        case "-":
+            const subtractResult = subtract(numOne, numTwo);
+            return subtractResult;
+        case "*":
+            const multiplyResult = multiply(numOne, numTwo);
+            return multiplyResult;
+        case "/":
+            const divideResult = divide(numOne, numTwo);
+            return divideResult;
+        default:
+            return "It was none of these!";
+
+    }
+
+}
+
+console.log(operate("-", 2, 4));

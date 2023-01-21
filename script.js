@@ -1,18 +1,44 @@
-let display = document.querySelector('.displayOutput');
+let displayOutputContainer = document.querySelector('.displayOutputContainer');
+let inputDisplay = document.querySelector('.displayInput');
 let numberPad = document.querySelectorAll('.numberPad');
 let multiplyOperator = document.querySelector('.multiply');
+let equalSign = document.querySelector('.equalSign');
+let displayResult = document.createElement('div');
+displayResult.className = "displayResult";
 let displayHolder = [];
+let calcMemory = [];
 let noComma;
-let tempArray;
+let firstTempArray;
+let secondInputArray = [];
 let waitSecondInput = false;
+let operatorSign;
+let firstInputNum;
+let returnValue;
 
 
 
-function multiplyOperatorListen(){
-    multiplyOperator.addEventListener('click', multiplyOperation )
+function equalOperatorListen() {
+    equalSign.addEventListener('click', equalOperation);
 }
 
-function multiplyOperation(){
+function equalOperation() {
+    noComma = +noComma;
+    returnValue = operate(operatorSign, firstInputNum, noComma);
+    calcMemory.push(returnValue);
+    waitSecondInput = false;
+    inputDisplay.textContent = calcMemory.join("");
+    inputDisplay.style.alignItems = "flex-start";
+    displayOutputContainer.appendChild(displayResult);
+
+
+}
+
+
+function multiplyOperatorListen() {
+    multiplyOperator.addEventListener('click', multiplyOperation);
+}
+
+function multiplyOperation() {
     waitSecondInput = true;
     console.log(`noComma var length: ${noComma.toString().length}`);
     displayHolder.unshift(+noComma);
@@ -21,8 +47,8 @@ function multiplyOperation(){
     let displayOperator = this.textContent;
     displayHolder.push(displayOperator);
     const holderValue = displayHolder.join(" ");
-    display.textContent = holderValue.toLocaleString("en-US");
-  
+    inputDisplay.textContent = holderValue.toLocaleString("en-US");
+
 }
 
 
@@ -30,37 +56,50 @@ function multiplyOperation(){
 
 function numPadListen() {
     numberPad.forEach(num => num.addEventListener('click', numInputHolder));
-    
+
 }
 
-function numInputHolder(event){
-    let value = +this.textContent;
-    const type = typeof value;
-    // console.log(+this.textContent);
-    // console.log(type);
-    displayHolder.push(value);
-    tempArray = [];
-    tempArray = tempArray.concat(displayHolder);
-    if (waitSecondInput){
+function numInputHolder(event) {
+    if (waitSecondInput) {
         //noComma = tempArray.join(" ");
-        let valueOne = tempArray[0];
-        let valueTwo = tempArray[1];
-        let valueThree = tempArray[2];
-        noComma = `${valueOne} ${valueTwo} ${valueThree}`;
+        let secondInputValue = +this.textContent;
+        secondInputArray.push(secondInputValue);
+        noComma = secondInputArray.join("");
+        const type = typeof value;
+        // console.log(+this.textContent);
+        // console.log(type);
+        //displayHolder.push(value);
+        secondTempArray = [];
+        secondTempArray = secondTempArray.concat(displayHolder);
+        firstInputNum = secondTempArray[0];
+        console.log(typeof (firstInputNum));
+        operatorSign = secondTempArray[1];
+        //let valueThree = tempArray[2];
+        inputDisplay.textContent = `${firstInputNum} ${operatorSign} ${noComma}`
+        //noComma = `${valueOne} ${valueTwo} ${valueThree}`;
         // waitSecondInput = false;
     } else {
-        noComma = tempArray.join("");
-        
+        let value = +this.textContent;
+        const type = typeof value;
+        // console.log(+this.textContent);
+        // console.log(type);
+        displayHolder.push(value);
+        firstTempArray = [];
+        firstTempArray = firstTempArray.concat(displayHolder);
+        noComma = firstTempArray.join("");
+        console.log(`${noComma.toLocaleString("en-US")} + ${type}`);
+        inputDisplay.textContent = `${noComma.toLocaleString("en-US")}`;
+        console.log(`noComma var length: ${noComma.toString().length}`);
+
     }
-    console.log(`${noComma.toLocaleString("en-US")} + ${type}`);
-    display.textContent = `${noComma.toLocaleString("en-US")}`;
-    console.log(`noComma var length: ${noComma.toString().length}`);
-    
+
+
 
 }
 
 numPadListen();
 multiplyOperatorListen();
+equalOperatorListen();
 
 
 
@@ -110,7 +149,7 @@ function operate(symbol, numOne, numTwo) {
         case "-":
             const subtractResult = subtract(numOne, numTwo);
             return subtractResult;
-        case "*":
+        case "X":
             const multiplyResult = multiply(numOne, numTwo);
             return multiplyResult;
         case "/":

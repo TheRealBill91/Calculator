@@ -42,15 +42,53 @@ body {
     gap: 4px;
 }
 
-.displayOutput {
+.displayOutputContainer {
     border: 2px solid rgb(166, 166, 166);
     width: 350px;
     height: 96px;
     display: flex;
     justify-content: flex-end;
     font-size: 42px;
-    align-items: center;
+    align-items: flex-end;
     align-self: flex-start;
+}
+
+.displayInput {
+    width: 145px;
+    height: 50px;
+    display: inline-block;
+    border: 2px solid orange;
+    justify-content: flex-end;
+    align-items: flex-end;
+    overflow-x: scroll;
+    white-space: nowrap;
+    font-size: 36px;
+}
+
+.displayInput::-webkit-scrollbar {
+    width: 10px;
+    height: 4px;
+    background-color: rgb(255, 255, 255);
+}
+
+.displayInput::-webkit-scrollbar-thumb {
+    /* width: 10px;
+    height: 4px; */
+    background-color: rgb(147, 147, 147);
+    border-radius: 5px;
+}
+
+
+
+
+
+
+.displayResult {
+    width: 155px;
+    height: 45px;
+    border: 1px solid blue;
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 
 /* 

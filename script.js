@@ -1,10 +1,11 @@
 let displayOutputContainer = document.querySelector('.displayOutputContainer');
 let inputDisplay = document.querySelector('.displayInput');
+let displayResult = document.querySelector('.displayResult');
 let numberPad = document.querySelectorAll('.numberPad');
 let multiplyOperator = document.querySelector('.multiply');
+let additionOperator = document.querySelector('.add');
 let equalSign = document.querySelector('.equalSign');
-let displayResult = document.createElement('div');
-displayResult.className = "displayResult";
+let clearButton = document.querySelector('.clearButton');
 let displayHolder = [];
 let calcMemory = [];
 let noComma;
@@ -16,6 +17,34 @@ let firstInputNum;
 let returnValue;
 
 
+numPadListen();
+multiplyOperatorListen();
+additionOperatorListen();
+equalOperatorListen();
+clearButtonListen();
+
+
+
+
+
+function clearButtonListen(){
+    clearButton.addEventListener('click', clearEverything);
+}
+
+function clearEverything(){
+    displayHolder = [];
+    calcMemory = [];
+    noComma = undefined;
+    firstTempArray = [];
+    secondInputArray = [];
+    waitSecondInput = false;
+    firstInputNum = undefined;
+    returnValue = undefined;
+    operatorSign = undefined
+    inputDisplay.textContent = "";
+    displayResult.textContent = "";
+}
+
 
 function equalOperatorListen() {
     equalSign.addEventListener('click', equalOperation);
@@ -26,11 +55,25 @@ function equalOperation() {
     returnValue = operate(operatorSign, firstInputNum, noComma);
     calcMemory.push(returnValue);
     waitSecondInput = false;
-    inputDisplay.textContent = calcMemory.join("");
-    inputDisplay.style.alignItems = "flex-start";
-    displayOutputContainer.appendChild(displayResult);
+    displayResult.textContent = calcMemory.join("");
 
 
+}
+
+function additionOperatorListen(){
+    additionOperator.addEventListener('click', additionOperation)
+}
+
+function additionOperation(){
+    waitSecondInput = true;
+    console.log(`noComma var length: ${noComma.toString().length}`);
+    displayHolder.unshift(+noComma);
+    displayHolder.splice(1);
+    noComma = 0;
+    let displayOperator = this.textContent;
+    displayHolder.push(displayOperator);
+    const holderValue = displayHolder.join(" ");
+    inputDisplay.textContent = holderValue.toLocaleString("en-US");
 }
 
 
@@ -97,9 +140,7 @@ function numInputHolder(event) {
 
 }
 
-numPadListen();
-multiplyOperatorListen();
-equalOperatorListen();
+
 
 
 

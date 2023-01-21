@@ -1,6 +1,30 @@
 let display = document.querySelector('.displayOutput');
 let numberPad = document.querySelectorAll('.numberPad');
+let multiplyOperator = document.querySelector('.multiply');
 let displayHolder = [];
+let noComma;
+let tempArray;
+let waitSecondInput = false;
+
+
+
+function multiplyOperatorListen(){
+    multiplyOperator.addEventListener('click', multiplyOperation )
+}
+
+function multiplyOperation(){
+    waitSecondInput = true;
+    console.log(`noComma var length: ${noComma.toString().length}`);
+    displayHolder.unshift(+noComma);
+    displayHolder.splice(1);
+    noComma = 0;
+    let displayOperator = this.textContent;
+    displayHolder.push(displayOperator);
+    const holderValue = displayHolder.join(" ");
+    display.textContent = holderValue.toLocaleString("en-US");
+  
+}
+
 
 
 
@@ -15,13 +39,28 @@ function numInputHolder(event){
     // console.log(+this.textContent);
     // console.log(type);
     displayHolder.push(value);
-    let noComma = +displayHolder.join("");
-    console.log(noComma.toLocaleString("en-US"));
+    tempArray = [];
+    tempArray = tempArray.concat(displayHolder);
+    if (waitSecondInput){
+        //noComma = tempArray.join(" ");
+        let valueOne = tempArray[0];
+        let valueTwo = tempArray[1];
+        let valueThree = tempArray[2];
+        noComma = `${valueOne} ${valueTwo} ${valueThree}`;
+        // waitSecondInput = false;
+    } else {
+        noComma = tempArray.join("");
+        
+    }
+    console.log(`${noComma.toLocaleString("en-US")} + ${type}`);
     display.textContent = `${noComma.toLocaleString("en-US")}`;
+    console.log(`noComma var length: ${noComma.toString().length}`);
+    
 
 }
 
 numPadListen();
+multiplyOperatorListen();
 
 
 

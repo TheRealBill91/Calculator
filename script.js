@@ -55,7 +55,7 @@ function equalOperatorListen() {
 }
 
 function equalOperation() {
-    if (!calcMemory[2]) {
+    if (calcMemory.length >=1 && !calcMemory[2]) {
         return;
     } else if (calcMemory.length >= 1){
         returnValue = operate(calcMemory[1], calcMemory[0], calcMemory[2]);
@@ -80,14 +80,15 @@ function additionOperatorListen() {
 }
 
 function additionOperation() {
-    if (displayHolder.length > 2) {
-        waitSecondInput = false;
-        returnValue = operate(displayHolder[1], displayHolder[0], displayHolder[2]);
-        noComma = undefined;
-        calcMemory.push(returnValue);
-        returnValue = 0;
+    if (displayHolder.length > 1 && waitSecondInput) {
+        displayHolder.push(+noComma);
         let displayOperator = this.textContent;
         displayHolder.push(displayOperator);
+        noComma = undefined;
+        waitSecondInput = false;
+        returnValue = operate(displayHolder[1], displayHolder[0], displayHolder[2]);
+        calcMemory.push(returnValue);
+        returnValue = 0;
         calcMemory.push(displayOperator);
         const holderValueTwo = displayHolder.join("");
         inputDisplay.textContent = holderValueTwo;
@@ -170,7 +171,6 @@ function numInputHolder(event) {
         let secondInputValue = +this.textContent;
         secondInputArray.push(secondInputValue);
         noComma = secondInputArray.join("");
-        displayHolder.push(+noComma);
         const type = typeof value;
         // console.log(+this.textContent);
         // console.log(type);

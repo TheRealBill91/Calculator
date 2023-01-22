@@ -4,6 +4,8 @@ let displayResult = document.querySelector('.displayResult');
 let numberPad = document.querySelectorAll('.numberPad');
 let multiplyOperator = document.querySelector('.multiply');
 let additionOperator = document.querySelector('.add');
+let subtractionOperator = document.querySelector('.subtract');
+let divisionOperator = document.querySelector('.divide');
 let equalSign = document.querySelector('.equalSign');
 let clearButton = document.querySelector('.clearButton');
 let displayHolder = [];
@@ -19,7 +21,9 @@ let returnValue;
 
 numPadListen();
 multiplyOperatorListen();
+divisionOperatorListen();
 additionOperatorListen();
+subtractionOperatorListen();
 equalOperatorListen();
 clearButtonListen();
 
@@ -27,11 +31,11 @@ clearButtonListen();
 
 
 
-function clearButtonListen(){
+function clearButtonListen() {
     clearButton.addEventListener('click', clearEverything);
 }
 
-function clearEverything(){
+function clearEverything() {
     displayHolder = [];
     calcMemory = [];
     noComma = undefined;
@@ -51,20 +55,62 @@ function equalOperatorListen() {
 }
 
 function equalOperation() {
-    noComma = +noComma;
-    returnValue = operate(operatorSign, firstInputNum, noComma);
-    calcMemory.push(returnValue);
-    waitSecondInput = false;
-    displayResult.textContent = calcMemory.join("");
+    if (!calcMemory[2]) {
+        return;
+    } else if (calcMemory.length >= 1){
+        returnValue = operate(calcMemory[1], calcMemory[0], calcMemory[2]);
+        calcMemory = [];
+        calcMemory.push(returnValue);
+        displayResult.textContent = calcMemory.join("");
+    } else {
+        noComma = +noComma;
+        returnValue = operate(operatorSign, firstInputNum, noComma);
+        calcMemory.push(returnValue);
+        waitSecondInput = false;
+        displayResult.textContent = calcMemory.join("");
+    }
+
+   
 
 
 }
 
-function additionOperatorListen(){
+function additionOperatorListen() {
     additionOperator.addEventListener('click', additionOperation)
 }
 
-function additionOperation(){
+function additionOperation() {
+    if (displayHolder.length > 2) {
+        waitSecondInput = false;
+        returnValue = operate(displayHolder[1], displayHolder[0], displayHolder[2]);
+        noComma = undefined;
+        calcMemory.push(returnValue);
+        returnValue = 0;
+        let displayOperator = this.textContent;
+        displayHolder.push(displayOperator);
+        calcMemory.push(displayOperator);
+        const holderValueTwo = displayHolder.join("");
+        inputDisplay.textContent = holderValueTwo;
+    } else {
+        waitSecondInput = true;
+        console.log(`noComma var length: ${noComma.toString().length}`);
+        displayHolder.unshift(+noComma);
+        displayHolder.splice(1);
+        noComma = 0;
+        let displayOperator = this.textContent;
+        displayHolder.push(displayOperator);
+        const holderValue = displayHolder.join("");
+        inputDisplay.textContent = holderValue.toLocaleString("en-US");
+    }
+}
+
+
+
+function subtractionOperatorListen() {
+    subtractionOperator.addEventListener('click', subtractionOperation)
+}
+
+function subtractionOperation() {
     waitSecondInput = true;
     console.log(`noComma var length: ${noComma.toString().length}`);
     displayHolder.unshift(+noComma);
@@ -72,7 +118,7 @@ function additionOperation(){
     noComma = 0;
     let displayOperator = this.textContent;
     displayHolder.push(displayOperator);
-    const holderValue = displayHolder.join(" ");
+    const holderValue = displayHolder.join("");
     inputDisplay.textContent = holderValue.toLocaleString("en-US");
 }
 
@@ -89,9 +135,25 @@ function multiplyOperation() {
     noComma = 0;
     let displayOperator = this.textContent;
     displayHolder.push(displayOperator);
-    const holderValue = displayHolder.join(" ");
+    const holderValue = displayHolder.join("");
     inputDisplay.textContent = holderValue.toLocaleString("en-US");
 
+}
+
+function divisionOperatorListen() {
+    divisionOperator.addEventListener('click', divisionOperation);
+}
+
+function divisionOperation() {
+    waitSecondInput = true;
+    console.log(`noComma var length: ${noComma.toString().length}`);
+    displayHolder.unshift(+noComma);
+    displayHolder.splice(1);
+    noComma = 0;
+    let displayOperator = this.textContent;
+    displayHolder.push(displayOperator);
+    const holderValue = displayHolder.join("");
+    inputDisplay.textContent = holderValue.toLocaleString("en-US");
 }
 
 
@@ -108,6 +170,7 @@ function numInputHolder(event) {
         let secondInputValue = +this.textContent;
         secondInputArray.push(secondInputValue);
         noComma = secondInputArray.join("");
+        displayHolder.push(+noComma);
         const type = typeof value;
         // console.log(+this.textContent);
         // console.log(type);
@@ -118,9 +181,14 @@ function numInputHolder(event) {
         console.log(typeof (firstInputNum));
         operatorSign = secondTempArray[1];
         //let valueThree = tempArray[2];
-        inputDisplay.textContent = `${firstInputNum} ${operatorSign} ${noComma}`
+        inputDisplay.textContent = firstInputNum + "" + operatorSign + "" + noComma;
         //noComma = `${valueOne} ${valueTwo} ${valueThree}`;
         // waitSecondInput = false;
+    } else if (calcMemory.length >= 1) {
+        let value = +this.textContent;
+        displayHolder.push(value);
+        calcMemory.push(value);
+        inputDisplay.textContent = displayHolder.join("");
     } else {
         let value = +this.textContent;
         const type = typeof value;

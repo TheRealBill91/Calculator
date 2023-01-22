@@ -56,15 +56,19 @@ body {
 
 .displayInput {
     width: 160px;
-    height: 45px;
-    display: inline-block;
+    height: 50px;
+    display: flex;
+    align-items: flex-end;
+    align-self: flex-end;
+    justify-content: flex-end;
     border: 2px solid orange;
     justify-content: flex-end;
     align-items: flex-end;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
-    font-size: 38px;
+    font-size: 32px;
+    color: rgb(95, 95, 95);
 }
 
 .displayInput::-webkit-scrollbar {

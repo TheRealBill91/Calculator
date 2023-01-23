@@ -57,7 +57,9 @@ function equalOperatorListen() {
 }
 
 function equalOperation() {
-    if (calcMemory.length >= 1 && !calcMemory[1] && !calcMemory[2]) {
+    if (calcMemory.length >= 1 && !calcMemory[2]) {
+        return;
+    } else if (!operatorSign){
         return;
     } else if (calcMemory.length >= 1 && noComma) {
         displayHolder.push(+noComma);
@@ -78,6 +80,7 @@ function equalOperation() {
         displayHolder.push(displayOperator)
         equalAfterEnter = true;
         returnValue = operate(operatorSign, firstInputNum, noComma);
+        // operatorSign = undefined;
         noComma = 0;
         calcMemory.push(returnValue);
         waitSecondInput = false;

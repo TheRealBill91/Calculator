@@ -60,8 +60,11 @@ function equalOperatorListen() {
 }
 
 function equalOperation() {
+    //prevents user from hitting enter button without first selecting a number after an operation has taken place
     if (calcMemory.length >= 1 && equalAfterEnter) {
         return;
+        //prevents user from hitting enter button if they have only input one number total
+        // look at first if statement in numInputHolder() to see why
     } else if (!operatorSign) {
         return;
     } else if (calcMemory.length >= 1 && noComma) {
@@ -176,6 +179,7 @@ function subtractionOperation() {
         const holderValueTwo = displayHolder.join("");
         inputDisplay.textContent = holderValueTwo;
         secondInputArray = [];
+        //adds operator to calcMemory array after user operates (hits enter) on two previous numbers
     } else if (equalAfterEnter) {
         mustBeNumber = false;
         secondInputArray = [];
@@ -220,15 +224,59 @@ function multiplyOperatorListen() {
 }
 
 function multiplyOperation() {
-    waitSecondInput = true;
-    console.log(`noComma var length: ${noComma.toString().length}`);
-    displayHolder.unshift(+noComma);
-    displayHolder.splice(1);
-    noComma = 0;
-    let displayOperator = this.textContent;
-    displayHolder.push(displayOperator);
-    const holderValue = displayHolder.join("");
-    inputDisplay.textContent = holderValue.toLocaleString("en-US");
+    if (!mustBeNumber) {
+        return; //returns if user trys to enter subtract button twice without first entering a number
+    } else if (displayHolder.length > 1 && waitSecondInput) {
+        mustBeNumber = false; //requires user to enter number after hitting one of the four operators
+        displayHolder.push(+noComma);
+        let displayOperator = this.textContent;
+        displayHolder.push(displayOperator);
+        noComma = 0;
+        waitSecondInput = false;
+        returnValue = operate(displayHolder[1], displayHolder[0], displayHolder[2]);
+        calcMemory.push(returnValue);
+        returnValue = 0;
+        calcMemory.push(displayOperator);
+        const holderValueTwo = displayHolder.join("");
+        inputDisplay.textContent = holderValueTwo;
+        secondInputArray = [];
+        //adds operator to calcMemory array after user operates (hits enter) on two previous numbers
+    } else if (equalAfterEnter) {
+        mustBeNumber = false;
+        secondInputArray = [];
+        let displayOperator = this.textContent;
+        displayHolder.push(displayOperator);
+        calcMemory.push(displayOperator);
+        noComma = 0;
+        inputDisplay.textContent = displayHolder.join("");
+    } //added the displayOperator = true so that the second input number (before any equals) never runs the below if statement
+    else if (displayHolder.length >= 4 && displayOperator) {
+        mustBeNumber = false;
+        secondInputArray = [];
+        if (noComma) {
+            displayHolder.push(+noComma);
+            calcMemory.push(+noComma);
+        }
+        let displayOperator = this.textContent;
+        displayHolder.push(displayOperator);
+        noComma = 0;
+        returnValue = operate(calcMemory[1], calcMemory[0], calcMemory[2]);
+        calcMemory = [];
+        calcMemory.push(returnValue);
+        calcMemory.push(displayOperator);
+        inputDisplay.textContent = displayHolder.join("");
+    } else {
+        mustBeNumber = false;
+        waitSecondInput = true;
+        console.log(`noComma var length: ${noComma.toString().length}`);
+        displayHolder.unshift(+noComma);
+        displayHolder.splice(1);
+        noComma = 0;
+        displayOperator = this.textContent;
+        displayHolder.push(displayOperator);
+        const holderValue = displayHolder.join("");
+        inputDisplay.textContent = holderValue.toLocaleString("en-US");
+    }
 
 }
 
@@ -278,6 +326,7 @@ function numInputHolder(event) {
         // waitSecondInput = false;
     } else if (calcMemory.length >= 1 && equalAfterEnter) {
         mustBeNumber = true;
+        //allows user to hit enter button again since they have selected a number
         equalAfterEnter = false;
         let value = +this.textContent;
         // displayHolder.push(value);

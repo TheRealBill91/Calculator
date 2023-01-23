@@ -9,6 +9,7 @@ let divisionOperator = document.querySelector('.divide');
 let equalSign = document.querySelector('.equalSign');
 let clearButton = document.querySelector('.clearButton');
 let displayOperator;
+let mustBeNumber = false //variable used to make sure user cannot enter an operator twice
 let displayHolder = [];
 let calcMemory = [];
 let noComma;
@@ -98,7 +99,10 @@ function additionOperatorListen() {
 }
 
 function additionOperation() {
-    if (displayHolder.length > 1 && waitSecondInput) {
+    if (!mustBeNumber) {
+        return; //returns if user trys to enter subtract button twice without first entering a number
+    } else if (displayHolder.length > 1 && waitSecondInput) {
+        mustBeNumber = false;  //requires user to enter number after hitting one of the four operators
         displayHolder.push(+noComma);
         let displayOperator = this.textContent;
         displayHolder.push(displayOperator);
@@ -112,6 +116,7 @@ function additionOperation() {
         inputDisplay.textContent = holderValueTwo;
         secondInputArray = [];
     } else if (equalAfterEnter) {
+        mustBeNumber = false;
         secondInputArray = [];
         let displayOperator = this.textContent;
         displayHolder.push(displayOperator);
@@ -120,6 +125,7 @@ function additionOperation() {
         inputDisplay.textContent = displayHolder.join("");
     } //added the displayOperator = true so that 
     else if (displayHolder.length >= 4 && displayOperator) {
+        mustBeNumber = false;
         secondInputArray = [];
         if (noComma) {
             displayHolder.push(+noComma);
@@ -134,6 +140,7 @@ function additionOperation() {
         calcMemory.push(displayOperator);
         inputDisplay.textContent = displayHolder.join("");
     } else {
+        mustBeNumber = false;
         waitSecondInput = true;
         console.log(`noComma var length: ${noComma.toString().length}`);
         displayHolder.unshift(+noComma);
@@ -153,7 +160,10 @@ function subtractionOperatorListen() {
 }
 
 function subtractionOperation() {
-    if (displayHolder.length > 1 && waitSecondInput) {
+    if (!mustBeNumber) {
+        return; //returns if user trys to enter subtract button twice without first entering a number
+    } else if (displayHolder.length > 1 && waitSecondInput) {
+        mustBeNumber = false; //requires user to enter number after hitting one of the four operators
         displayHolder.push(+noComma);
         let displayOperator = this.textContent;
         displayHolder.push(displayOperator);
@@ -167,6 +177,7 @@ function subtractionOperation() {
         inputDisplay.textContent = holderValueTwo;
         secondInputArray = [];
     } else if (equalAfterEnter) {
+        mustBeNumber = false;
         secondInputArray = [];
         let displayOperator = this.textContent;
         displayHolder.push(displayOperator);
@@ -175,6 +186,7 @@ function subtractionOperation() {
         inputDisplay.textContent = displayHolder.join("");
     } //added the displayOperator = true so that the second input number (before any equals) never runs the below if statement
     else if (displayHolder.length >= 4 && displayOperator) {
+        mustBeNumber = false;
         secondInputArray = [];
         if (noComma) {
             displayHolder.push(+noComma);
@@ -189,6 +201,7 @@ function subtractionOperation() {
         calcMemory.push(displayOperator);
         inputDisplay.textContent = displayHolder.join("");
     } else {
+        mustBeNumber = false;
         waitSecondInput = true;
         console.log(`noComma var length: ${noComma.toString().length}`);
         displayHolder.unshift(+noComma);
@@ -245,6 +258,7 @@ function numPadListen() {
 
 function numInputHolder(event) {
     if (waitSecondInput) {
+        mustBeNumber = true;
         //noComma = tempArray.join(" ");
         let secondInputValue = +this.textContent;
         secondInputArray.push(secondInputValue);
@@ -263,6 +277,7 @@ function numInputHolder(event) {
         //noComma = `${valueOne} ${valueTwo} ${valueThree}`;
         // waitSecondInput = false;
     } else if (calcMemory.length >= 1 && equalAfterEnter) {
+        mustBeNumber = true;
         equalAfterEnter = false;
         let value = +this.textContent;
         // displayHolder.push(value);
@@ -271,6 +286,7 @@ function numInputHolder(event) {
         noComma = secondInputArray.join("");
         inputDisplay.textContent = displayHolder.join("") + noComma;
     } else if (calcMemory.length >= 1) {
+        mustBeNumber = true;
         let value = +this.textContent;
         // displayHolder.push(value);
         // calcMemory.push(value);
@@ -278,6 +294,7 @@ function numInputHolder(event) {
         noComma = secondInputArray.join("");
         inputDisplay.textContent = displayHolder.join("") + noComma;
     } else {
+        mustBeNumber = true;
         let value = +this.textContent;
         const type = typeof value;
         // console.log(+this.textContent);

@@ -7,7 +7,7 @@ let additionOperator = document.querySelector('.add');
 let subtractionOperator = document.querySelector('.subtract');
 let divisionOperator = document.querySelector('.divide');
 let equalSign = document.querySelector('.equalSign');
-let clearButton = document.querySelector('.clearButton');
+let clearButton = document.querySelector('.clearAllButton');
 let displayOperator;
 let mustBeNumber = false //variable used to make sure user cannot enter an operator twice
 //Not being used, equalAfterEnter boolean doing the same thing.

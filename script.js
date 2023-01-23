@@ -70,9 +70,11 @@ function equalOperation() {
         // look at first if statement in numInputHolder() to see why
     } else if (!operatorSign) {
         return;
+    //When doing more than one operation (on two nums) BEFORE hitting enter, if a user trys to hit enter without entering the second number,
+    //the equal button will return
+    } else if (!mustBeNumber){
+        return;
     } else if (calcMemory.length >= 1 && noComma) {
-        //prevents user from hitting enter button twice without entering operator first
-        mustBeOperator = true;
         displayHolder.push(+noComma);
         calcMemory.push(+noComma);
         let displayOperator = this.textContent;

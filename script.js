@@ -8,6 +8,7 @@ let subtractionOperator = document.querySelector('.subtract');
 let divisionOperator = document.querySelector('.divide');
 let equalSign = document.querySelector('.equalSign');
 let clearButton = document.querySelector('.clearButton');
+let displayOperator;
 let displayHolder = [];
 let calcMemory = [];
 let noComma;
@@ -49,6 +50,7 @@ function clearEverything() {
     inputDisplay.textContent = "";
     displayResult.textContent = "";
     equalAfterEnter = false;
+    displayOperator = undefined;
 }
 
 
@@ -57,9 +59,9 @@ function equalOperatorListen() {
 }
 
 function equalOperation() {
-    if (calcMemory.length >= 1 && !calcMemory[2]) {
+    if (calcMemory.length >= 1 && equalAfterEnter) {
         return;
-    } else if (!operatorSign){
+    } else if (!operatorSign) {
         return;
     } else if (calcMemory.length >= 1 && noComma) {
         displayHolder.push(+noComma);
@@ -83,13 +85,11 @@ function equalOperation() {
         // operatorSign = undefined;
         noComma = 0;
         calcMemory.push(returnValue);
+        calcMemory.toLocaleString;
         waitSecondInput = false;
         displayResult.textContent = calcMemory.join("");
         inputDisplay.textContent = displayHolder.join("");
     }
-
-
-
 
 }
 
@@ -118,9 +118,10 @@ function additionOperation() {
         calcMemory.push(displayOperator);
         noComma = 0;
         inputDisplay.textContent = displayHolder.join("");
-    } else if (displayHolder.length >= 4) {
+    } //added the displayOperator = true so that 
+    else if (displayHolder.length >= 4 && displayOperator) {
         secondInputArray = [];
-        if (noComma){
+        if (noComma) {
             displayHolder.push(+noComma);
             calcMemory.push(+noComma);
         }
@@ -138,7 +139,7 @@ function additionOperation() {
         displayHolder.unshift(+noComma);
         displayHolder.splice(1);
         noComma = 0;
-        let displayOperator = this.textContent;
+        displayOperator = this.textContent;
         displayHolder.push(displayOperator);
         const holderValue = displayHolder.join("");
         inputDisplay.textContent = holderValue.toLocaleString("en-US");
@@ -152,15 +153,52 @@ function subtractionOperatorListen() {
 }
 
 function subtractionOperation() {
-    waitSecondInput = true;
-    console.log(`noComma var length: ${noComma.toString().length}`);
-    displayHolder.unshift(+noComma);
-    displayHolder.splice(1);
-    noComma = 0;
-    let displayOperator = this.textContent;
-    displayHolder.push(displayOperator);
-    const holderValue = displayHolder.join("");
-    inputDisplay.textContent = holderValue.toLocaleString("en-US");
+    if (displayHolder.length > 1 && waitSecondInput) {
+        displayHolder.push(+noComma);
+        let displayOperator = this.textContent;
+        displayHolder.push(displayOperator);
+        noComma = 0;
+        waitSecondInput = false;
+        returnValue = operate(displayHolder[1], displayHolder[0], displayHolder[2]);
+        calcMemory.push(returnValue);
+        returnValue = 0;
+        calcMemory.push(displayOperator);
+        const holderValueTwo = displayHolder.join("");
+        inputDisplay.textContent = holderValueTwo;
+        secondInputArray = [];
+    } else if (equalAfterEnter) {
+        secondInputArray = [];
+        let displayOperator = this.textContent;
+        displayHolder.push(displayOperator);
+        calcMemory.push(displayOperator);
+        noComma = 0;
+        inputDisplay.textContent = displayHolder.join("");
+    } //added the displayOperator = true so that the second input number (before any equals) never runs the below if statement
+    else if (displayHolder.length >= 4 && displayOperator) {
+        secondInputArray = [];
+        if (noComma) {
+            displayHolder.push(+noComma);
+            calcMemory.push(+noComma);
+        }
+        let displayOperator = this.textContent;
+        displayHolder.push(displayOperator);
+        noComma = 0;
+        returnValue = operate(calcMemory[1], calcMemory[0], calcMemory[2]);
+        calcMemory = [];
+        calcMemory.push(returnValue);
+        calcMemory.push(displayOperator);
+        inputDisplay.textContent = displayHolder.join("");
+    } else {
+        waitSecondInput = true;
+        console.log(`noComma var length: ${noComma.toString().length}`);
+        displayHolder.unshift(+noComma);
+        displayHolder.splice(1);
+        noComma = 0;
+        displayOperator = this.textContent;
+        displayHolder.push(displayOperator);
+        const holderValue = displayHolder.join("");
+        inputDisplay.textContent = holderValue.toLocaleString("en-US");
+    }
 }
 
 
@@ -224,7 +262,7 @@ function numInputHolder(event) {
         inputDisplay.textContent = firstInputNum + "" + operatorSign + "" + noComma;
         //noComma = `${valueOne} ${valueTwo} ${valueThree}`;
         // waitSecondInput = false;
-    } else if (calcMemory.length >= 1 && equalAfterEnter){
+    } else if (calcMemory.length >= 1 && equalAfterEnter) {
         equalAfterEnter = false;
         let value = +this.textContent;
         // displayHolder.push(value);

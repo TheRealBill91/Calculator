@@ -17,6 +17,7 @@ let waitSecondInput = false;
 let operatorSign;
 let firstInputNum;
 let returnValue;
+let equalAfterEnter = false;
 
 
 numPadListen();
@@ -47,6 +48,7 @@ function clearEverything() {
     operatorSign = undefined
     inputDisplay.textContent = "";
     displayResult.textContent = "";
+    equalAfterEnter = false;
 }
 
 
@@ -55,22 +57,35 @@ function equalOperatorListen() {
 }
 
 function equalOperation() {
-    if (calcMemory.length >=1 && !calcMemory[2]) {
+    if (calcMemory.length >= 1 && !calcMemory[1] && !calcMemory[2]) {
         return;
-    } else if (calcMemory.length >= 1){
+    } else if (calcMemory.length >= 1 && noComma) {
+        displayHolder.push(+noComma);
+        calcMemory.push(+noComma);
+        let displayOperator = this.textContent;
+        displayHolder.push(displayOperator);
+        noComma = 0;
         returnValue = operate(calcMemory[1], calcMemory[0], calcMemory[2]);
         calcMemory = [];
         calcMemory.push(returnValue);
+        inputDisplay.textContent = displayHolder.join("");
         displayResult.textContent = calcMemory.join("");
+        equalAfterEnter = true;
     } else {
         noComma = +noComma;
+        let displayOperator = this.textContent;
+        displayHolder.push(noComma);
+        displayHolder.push(displayOperator)
+        equalAfterEnter = true;
         returnValue = operate(operatorSign, firstInputNum, noComma);
+        noComma = 0;
         calcMemory.push(returnValue);
         waitSecondInput = false;
         displayResult.textContent = calcMemory.join("");
+        inputDisplay.textContent = displayHolder.join("");
     }
 
-   
+
 
 
 }
@@ -84,7 +99,7 @@ function additionOperation() {
         displayHolder.push(+noComma);
         let displayOperator = this.textContent;
         displayHolder.push(displayOperator);
-        noComma = undefined;
+        noComma = 0;
         waitSecondInput = false;
         returnValue = operate(displayHolder[1], displayHolder[0], displayHolder[2]);
         calcMemory.push(returnValue);
@@ -92,6 +107,28 @@ function additionOperation() {
         calcMemory.push(displayOperator);
         const holderValueTwo = displayHolder.join("");
         inputDisplay.textContent = holderValueTwo;
+        secondInputArray = [];
+    } else if (equalAfterEnter) {
+        secondInputArray = [];
+        let displayOperator = this.textContent;
+        displayHolder.push(displayOperator);
+        calcMemory.push(displayOperator);
+        noComma = 0;
+        inputDisplay.textContent = displayHolder.join("");
+    } else if (displayHolder.length >= 4) {
+        secondInputArray = [];
+        if (noComma){
+            displayHolder.push(+noComma);
+            calcMemory.push(+noComma);
+        }
+        let displayOperator = this.textContent;
+        displayHolder.push(displayOperator);
+        noComma = 0;
+        returnValue = operate(calcMemory[1], calcMemory[0], calcMemory[2]);
+        calcMemory = [];
+        calcMemory.push(returnValue);
+        calcMemory.push(displayOperator);
+        inputDisplay.textContent = displayHolder.join("");
     } else {
         waitSecondInput = true;
         console.log(`noComma var length: ${noComma.toString().length}`);
@@ -184,11 +221,21 @@ function numInputHolder(event) {
         inputDisplay.textContent = firstInputNum + "" + operatorSign + "" + noComma;
         //noComma = `${valueOne} ${valueTwo} ${valueThree}`;
         // waitSecondInput = false;
+    } else if (calcMemory.length >= 1 && equalAfterEnter){
+        equalAfterEnter = false;
+        let value = +this.textContent;
+        // displayHolder.push(value);
+        // calcMemory.push(value);
+        secondInputArray.push(value);
+        noComma = secondInputArray.join("");
+        inputDisplay.textContent = displayHolder.join("") + noComma;
     } else if (calcMemory.length >= 1) {
         let value = +this.textContent;
-        displayHolder.push(value);
-        calcMemory.push(value);
-        inputDisplay.textContent = displayHolder.join("");
+        // displayHolder.push(value);
+        // calcMemory.push(value);
+        secondInputArray.push(value);
+        noComma = secondInputArray.join("");
+        inputDisplay.textContent = displayHolder.join("") + noComma;
     } else {
         let value = +this.textContent;
         const type = typeof value;

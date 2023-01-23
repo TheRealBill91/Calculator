@@ -70,9 +70,9 @@ function equalOperation() {
         // look at first if statement in numInputHolder() to see why
     } else if (!operatorSign) {
         return;
-    //When doing more than one operation (on two nums) BEFORE hitting enter, if a user trys to hit enter without entering the second number,
-    //the equal button will return
-    } else if (!mustBeNumber){
+        //When doing more than one operation (on two nums) BEFORE hitting enter, if a user trys to hit enter without entering the second number,
+        //the equal button will return
+    } else if (!mustBeNumber) {
         return;
     } else if (calcMemory.length >= 1 && noComma) {
         displayHolder.push(+noComma);
@@ -179,7 +179,7 @@ function subtractionOperation() {
     if (!mustBeNumber) {
         return; //returns if user trys to enter subtract button twice without first entering a number
     } else if (displayHolder.length > 1 && waitSecondInput) {
-        mustBeNumber = false; //requires user to enter number after hitting one of the four operators
+        mustBeNumber = false;  //requires user to enter number after hitting one of the four operators
         displayHolder.push(+noComma);
         let displayOperator = this.textContent;
         displayHolder.push(displayOperator);
@@ -198,10 +198,12 @@ function subtractionOperation() {
         secondInputArray = [];
         let displayOperator = this.textContent;
         displayHolder.push(displayOperator);
+        let tempCalcMemoryValue = calcMemory.join("");
         calcMemory.push(displayOperator);
         noComma = 0;
         inputDisplay.textContent = displayHolder.join("");
-    } //added the displayOperator = true so that the second input number (before any equals) never runs the below if statement
+        displayResult.textContent = tempCalcMemoryValue;
+    } //added the displayOperator = true so that 
     else if (displayHolder.length >= 4 && displayOperator) {
         mustBeNumber = false;
         secondInputArray = [];
@@ -217,17 +219,19 @@ function subtractionOperation() {
         calcMemory.push(returnValue);
         calcMemory.push(displayOperator);
         inputDisplay.textContent = displayHolder.join("");
+        displayResult.textContent = returnValue;
     } else {
         mustBeNumber = false;
         waitSecondInput = true;
         console.log(`noComma var length: ${noComma.toString().length}`);
         displayHolder.unshift(+noComma);
         displayHolder.splice(1);
-        noComma = 0;
+        //noComma = 0;
         displayOperator = this.textContent;
         displayHolder.push(displayOperator);
         const holderValue = displayHolder.join("");
         inputDisplay.textContent = holderValue.toLocaleString("en-US");
+        displayResult.textContent = +noComma;
     }
 }
 

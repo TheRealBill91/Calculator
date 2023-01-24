@@ -12,6 +12,7 @@ let displayOperator;
 let mustBeNumber = false //variable used to make sure user cannot enter an operator twice
 //Not being used, equalAfterEnter boolean doing the same thing.
 let mustBeOperator = false //boolean prevents user from hitting enter button twice in a row 
+let allowDecimalPerInput = true;
 let displayHolder = [];
 let calcMemory = [];
 let noComma;
@@ -75,6 +76,7 @@ function equalOperation() {
     } else if (!mustBeNumber) {
         return;
     } else if (calcMemory.length >= 1 && noComma) {
+        allowDecimalPerInput = true; //allow user to enter decimal again
         displayHolder.push(+noComma);
         calcMemory.push(+noComma);
         let displayOperator = this.textContent;
@@ -87,6 +89,7 @@ function equalOperation() {
         displayResult.textContent = calcMemory.join("");
         equalAfterEnter = true;
     } else {
+        allowDecimalPerInput = true; //allow user to enter decimal again
         noComma = +noComma;
         let displayOperator = this.textContent;
         displayHolder.push(noComma);
@@ -113,6 +116,7 @@ function additionOperation() {
     if (!mustBeNumber) {
         return; //returns if user trys to enter subtract button twice without first entering a number
     } else if (displayHolder.length > 1 && waitSecondInput) {
+        allowDecimalPerInput = true; //allow user to enter decimal again
         mustBeNumber = false;  //requires user to enter number after hitting one of the four operators
         displayHolder.push(+noComma);
         let displayOperator = this.textContent;
@@ -128,6 +132,7 @@ function additionOperation() {
         secondInputArray = [];
         //adds operator to calcMemory array after user operates (hits enter) on two previous numbers
     } else if (equalAfterEnter) {
+        allowDecimalPerInput = true; //allow user to enter decimal again
         mustBeNumber = false;
         secondInputArray = [];
         let displayOperator = this.textContent;
@@ -139,6 +144,7 @@ function additionOperation() {
         displayResult.textContent = tempCalcMemoryValue;
     } //added the displayOperator = true so that 
     else if (displayHolder.length >= 4 && displayOperator) {
+        allowDecimalPerInput = true; //allow user to enter decimal again
         mustBeNumber = false;
         secondInputArray = [];
         if (noComma) {
@@ -155,6 +161,7 @@ function additionOperation() {
         inputDisplay.textContent = displayHolder.join("");
         displayResult.textContent = returnValue;
     } else {
+        allowDecimalPerInput = true; //allow user to enter decimal again
         mustBeNumber = false;
         waitSecondInput = true;
         console.log(`noComma var length: ${noComma.toString().length}`);
@@ -179,6 +186,7 @@ function subtractionOperation() {
     if (!mustBeNumber) {
         return; //returns if user trys to enter subtract button twice without first entering a number
     } else if (displayHolder.length > 1 && waitSecondInput) {
+        allowDecimalPerInput = true;
         mustBeNumber = false;  //requires user to enter number after hitting one of the four operators
         displayHolder.push(+noComma);
         let displayOperator = this.textContent;
@@ -194,6 +202,7 @@ function subtractionOperation() {
         secondInputArray = [];
         //adds operator to calcMemory array after user operates (hits enter) on two previous numbers
     } else if (equalAfterEnter) {
+        allowDecimalPerInput = true;
         mustBeNumber = false;
         secondInputArray = [];
         let displayOperator = this.textContent;
@@ -205,6 +214,7 @@ function subtractionOperation() {
         displayResult.textContent = tempCalcMemoryValue;
     } //added the displayOperator = true so that 
     else if (displayHolder.length >= 4 && displayOperator) {
+        allowDecimalPerInput = true;
         mustBeNumber = false;
         secondInputArray = [];
         if (noComma) {
@@ -221,6 +231,7 @@ function subtractionOperation() {
         inputDisplay.textContent = displayHolder.join("");
         displayResult.textContent = returnValue;
     } else {
+        allowDecimalPerInput = true;
         mustBeNumber = false;
         waitSecondInput = true;
         console.log(`noComma var length: ${noComma.toString().length}`);
@@ -244,6 +255,7 @@ function multiplyOperation() {
     if (!mustBeNumber) {
         return; //returns if user trys to enter subtract button twice without first entering a number
     } else if (displayHolder.length > 1 && waitSecondInput) {
+        allowDecimalPerInput = true;
         mustBeNumber = false;  //requires user to enter number after hitting one of the four operators
         displayHolder.push(+noComma);
         let displayOperator = this.textContent;
@@ -259,6 +271,7 @@ function multiplyOperation() {
         secondInputArray = [];
         //adds operator to calcMemory array after user operates (hits enter) on two previous numbers
     } else if (equalAfterEnter) {
+        allowDecimalPerInput = true;
         mustBeNumber = false;
         secondInputArray = [];
         let displayOperator = this.textContent;
@@ -270,6 +283,7 @@ function multiplyOperation() {
         displayResult.textContent = tempCalcMemoryValue;
     } //added the displayOperator = true so that 
     else if (displayHolder.length >= 4 && displayOperator) {
+        allowDecimalPerInput = true;
         mustBeNumber = false;
         secondInputArray = [];
         if (noComma) {
@@ -286,6 +300,7 @@ function multiplyOperation() {
         inputDisplay.textContent = displayHolder.join("");
         displayResult.textContent = returnValue;
     } else {
+        allowDecimalPerInput = true;
         mustBeNumber = false;
         waitSecondInput = true;
         console.log(`noComma var length: ${noComma.toString().length}`);
@@ -308,6 +323,7 @@ function divisionOperation() {
     if (!mustBeNumber) {
         return; //returns if user trys to enter subtract button twice without first entering a number
     } else if (displayHolder.length > 1 && waitSecondInput) {
+        allowDecimalPerInput = true;
         mustBeNumber = false; //requires user to enter number after hitting one of the four operators
         displayHolder.push(+noComma);
         let displayOperator = this.textContent;
@@ -323,6 +339,7 @@ function divisionOperation() {
         secondInputArray = [];
         //adds operator to calcMemory array after user operates (hits enter) on two previous numbers
     } else if (equalAfterEnter) {
+        allowDecimalPerInput = true;
         mustBeNumber = false;
         secondInputArray = [];
         let displayOperator = this.textContent;
@@ -332,6 +349,7 @@ function divisionOperation() {
         inputDisplay.textContent = displayHolder.join("");
     } //added the displayOperator = true so that the second input number (before any equals) never runs the below if statement
     else if (displayHolder.length >= 4 && displayOperator) {
+        allowDecimalPerInput = true;
         mustBeNumber = false;
         secondInputArray = [];
         if (noComma) {
@@ -347,6 +365,7 @@ function divisionOperation() {
         calcMemory.push(displayOperator);
         inputDisplay.textContent = displayHolder.join("");
     } else {
+        allowDecimalPerInput = true;
         mustBeNumber = false;
         waitSecondInput = true;
         console.log(`noComma var length: ${noComma.toString().length}`);
@@ -373,7 +392,16 @@ function numInputHolder(event) {
     if (waitSecondInput) {
         mustBeNumber = true;
         //noComma = tempArray.join(" ");
-        let secondInputValue = +this.textContent;
+        let secondInputValue = this.textContent;
+        if (secondInputValue !== ".") {
+            +secondInputValue
+        }
+        //first if checks if decimal even exists, second if checks if it is allowed
+        if (secondInputValue == "."){
+            if (!isDecimalAllowed(secondInputValueq)) {
+                return;
+            };
+        }
         secondInputArray.push(secondInputValue);
         noComma = secondInputArray.join("");
         const type = typeof value;
@@ -395,6 +423,14 @@ function numInputHolder(event) {
         //allows user to hit enter button again since they have selected a number
         equalAfterEnter = false;
         let value = +this.textContent;
+        if (value !== ".") {
+            +value
+        }
+        if (value == "."){
+            if (!isDecimalAllowed(value)) {
+                return;
+            };
+        }
         // displayHolder.push(value);
         // calcMemory.push(value);
         secondInputArray.push(value);
@@ -404,6 +440,15 @@ function numInputHolder(event) {
     } else if (calcMemory.length >= 1) {
         mustBeNumber = true;
         let value = +this.textContent;
+        if (value !== ".") {
+            +value
+        }
+        if (value == ".") {
+            if (!isDecimalAllowed(value)) {
+                return;
+            };
+        }
+
         // displayHolder.push(value);
         // calcMemory.push(value);
         secondInputArray.push(value);
@@ -412,14 +457,21 @@ function numInputHolder(event) {
         displayResult.textContent = noComma;
     } else {
         mustBeNumber = true;
-        let value = +this.textContent;
-        const type = typeof value;
+        let value = this.textContent;
+        if (value !== ".") {
+            +value
+        }
+        if (!isDecimalAllowed(value)) {
+            return;
+        };
+        const type = typeof noComma;
         // console.log(+this.textContent);
         // console.log(type);
         displayHolder.push(value);
         firstTempArray = [];
         firstTempArray = firstTempArray.concat(displayHolder);
         noComma = firstTempArray.join("");
+        +noComma;
         console.log(`${noComma.toLocaleString("en-US")} + ${type}`);
         //inputDisplay.textContent = `${noComma.toLocaleString("en-US")}`;
         displayResult.textContent = `${noComma.toLocaleString("en-US")}`;
@@ -433,7 +485,14 @@ function numInputHolder(event) {
 
 
 
-
+function isDecimalAllowed(val) {
+    if (!allowDecimalPerInput) {
+        return false;
+    } else if (val == ".") {
+        allowDecimalPerInput = false;
+    }
+    return true
+}
 
 
 function add(...args) {

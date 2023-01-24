@@ -398,7 +398,7 @@ function numInputHolder(event) {
         }
         //first if checks if decimal even exists, second if checks if it is allowed
         if (secondInputValue == "."){
-            if (!isDecimalAllowed(secondInputValueq)) {
+            if (!isDecimalAllowed(secondInputValue)) {
                 return;
             };
         }

@@ -397,7 +397,7 @@ function numInputHolder(event) {
             +secondInputValue
         }
         //first if checks if decimal even exists, second if checks if it is allowed
-        if (secondInputValue == "."){
+        if (secondInputValue == ".") {
             if (!isDecimalAllowed(secondInputValue)) {
                 return;
             };
@@ -426,7 +426,7 @@ function numInputHolder(event) {
         if (value !== ".") {
             +value
         }
-        if (value == "."){
+        if (value == ".") {
             if (!isDecimalAllowed(value)) {
                 return;
             };
@@ -496,6 +496,10 @@ function isDecimalAllowed(val) {
 
 
 function add(...args) {
+    if (typeof (args[0]) == "string" || typeof (args[1]) == "string") {
+        return "Invalid result";
+    }
+
     const sum = args.reduce((previousValue, currentValue) => {
         return previousValue + currentValue;
     }, 0);
@@ -504,6 +508,10 @@ function add(...args) {
 };
 
 function subtract(...args) {
+    if (typeof (args[0]) == "string" || typeof (args[1]) == "string") {
+        return "Invalid result";
+    }
+
     const sum = args.reduce((previousValue, currentValue) => {
         return previousValue - currentValue;
     })
@@ -512,6 +520,10 @@ function subtract(...args) {
 }
 
 function multiply(...args) {
+    if (typeof (args[0]) == "string" || typeof (args[1]) == "string") {
+        return "Invalid result";
+    }
+
     const sum = args.reduce((previousValue, currentValue) => {
         return previousValue * currentValue;
     })
@@ -520,12 +532,18 @@ function multiply(...args) {
 }
 
 function divide(...args) {
+    if (typeof (args[0]) == "string" || typeof (args[1]) == "string") {
+        return "Invalid result";
+    }
+
     const sum = args.reduce((previousValue, currentValue) => {
         return previousValue / currentValue;
     })
 
     if (isNaN(sum)) {
         return 'Error';
+    } else if (!isFinite(sum)) {
+        return 'Error'
     } else {
         return sum;
     }

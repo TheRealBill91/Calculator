@@ -55,8 +55,10 @@ body {
 }
 
 .displayInputContainer {
-    width: 150px;
-    height: 50px;
+    /* width: 150px;
+    height: 50px; */
+    min-width: 155px;
+    max-width: 200px;
     display: flex;
     border: 2px solid orange;
     justify-content: flex-end;
@@ -65,6 +67,8 @@ body {
 
 .displayInput {
     width: fit-content;
+    min-width: 155px;
+    max-width: 200px;
     height: 45px;
     margin: 0;
     /* display: flex; */
@@ -95,12 +99,30 @@ body {
 }
 
 .displayResult {
-    width: 155px;
+    /* width: 155px; */
+    min-width: 155px;
+    max-width: 200px;
     height: 45px;
     border: 1px solid blue;
-    display: flex;
+    /* display: flex; */  /* Removes ability to use overflow scrool */
     justify-content: flex-end;
     align-items: flex-end;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.displayResult::-webkit-scrollbar {
+    width: 10px;
+    height: 3px;
+    background-color: rgb(255, 255, 255);
+}
+
+.displayResult::-webkit-scrollbar-thumb {
+    /* width: 10px; */
+    /* height: 10px; */
+    background-color: rgb(165, 165, 165);
+    border-radius: 5px;
 }
 
 /* 

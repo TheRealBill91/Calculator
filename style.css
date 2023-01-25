@@ -125,20 +125,10 @@ body {
     border-radius: 5px;
 }
 
-/* .equalSign {
-    width: 140px;
-} */
 
-/* .clearAllButton,
-.deleteButton {
-    width: 105px;
-} */
-
-.equalSign, .clearAllButton, .decimal {
+.decimal, .equalSign {
     width: 143px;
-    /* height: 67px; */
 }
-
 
 button {
     width: 69.25px;

@@ -484,31 +484,36 @@ function numInputHolder(event) {
         inputDisplay.textContent = displayHolder.join("");
         displayResult.textContent = noComma;
     } else {
-        mustBeNumber = true;
         let value = this.textContent;
-        if (value !== ".") {
-            +value
-        }
-        if (value == ".") {
-            if (!isDecimalAllowed(value)) {
-                return;
-            };
-        }
-        const type = typeof noComma;
-        // console.log(+this.textContent);
-        // console.log(type);
-        displayHolder.push(value);
-        firstTempArray = [];
-        firstTempArray = firstTempArray.concat(displayHolder);
-        noComma = firstTempArray.join("");
-        +noComma;
-        console.log(`${noComma.toLocaleString("en-US")} + ${type}`);
-        //inputDisplay.textContent = `${noComma.toLocaleString("en-US")}`;
-        displayResult.textContent = `${noComma.toLocaleString("en-US")}`;
-        console.log(`noComma var length: ${noComma.toString().length}`);
+        //takes the first number input when a user clicks a number
+        firstNumInput(value);
     }
 
 
+}
+
+function firstNumInput(value) {
+    mustBeNumber = true;
+    if (value !== ".") {
+        +value
+    }
+    if (value == ".") {
+        if (!isDecimalAllowed(value)) {
+            return;
+        };
+    }
+    const type = typeof noComma;
+    // console.log(+this.textContent);
+    // console.log(type);
+    displayHolder.push(value);
+    firstTempArray = [];
+    firstTempArray = firstTempArray.concat(displayHolder);
+    noComma = firstTempArray.join("");
+    +noComma;
+    console.log(`${noComma.toLocaleString("en-US")} + ${type}`);
+    //inputDisplay.textContent = `${noComma.toLocaleString("en-US")}`;
+    displayResult.textContent = `${noComma.toLocaleString("en-US")}`;
+    console.log(`noComma var length: ${noComma.toString().length}`);
 }
 
 

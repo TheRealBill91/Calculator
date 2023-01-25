@@ -450,7 +450,7 @@ function numInputHolder(event) {
         mustBeNumber = true;
         //allows user to hit enter button again since they have selected a number
         equalAfterEnter = false;
-        let value = +this.textContent;
+        let value = this.textContent;
         if (value !== ".") {
             +value
         }
@@ -467,7 +467,7 @@ function numInputHolder(event) {
         displayResult.textContent = value;
     } else if (calcMemory.length >= 1) {
         mustBeNumber = true;
-        let value = +this.textContent;
+        let value = this.textContent;
         if (value !== ".") {
             +value
         }

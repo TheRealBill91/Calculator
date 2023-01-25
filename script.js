@@ -7,7 +7,8 @@ let additionOperator = document.querySelector('.add');
 let subtractionOperator = document.querySelector('.subtract');
 let divisionOperator = document.querySelector('.divide');
 let equalSign = document.querySelector('.equalSign');
-let clearButton = document.querySelector('.clearAllButton');
+let clearAllButton = document.querySelector('.clearAllButton');
+let clearButton = document.querySelector('.deleteButton');
 let displayOperator;
 let mustBeNumber = false //variable used to make sure user cannot enter an operator twice
 //Not being used, equalAfterEnter boolean doing the same thing.
@@ -31,14 +32,15 @@ divisionOperatorListen();
 additionOperatorListen();
 subtractionOperatorListen();
 equalOperatorListen();
-clearButtonListen();
+clearAllButtonListen();
+clearSingleValue();
 
 
 
 
-
-function clearButtonListen() {
-    clearButton.addEventListener('click', clearEverything);
+//clears the entire calculator memory
+function clearAllButtonListen() {
+    clearAllButton.addEventListener('click', clearEverything);
 }
 
 function clearEverything() {
@@ -50,12 +52,26 @@ function clearEverything() {
     waitSecondInput = false;
     firstInputNum = undefined;
     returnValue = undefined;
-    operatorSign = undefined
+    operatorSign = undefined;
     inputDisplay.textContent = "";
     displayResult.textContent = "";
     equalAfterEnter = false;
     displayOperator = undefined;
     mustBeOperator = false;
+}
+
+
+//clears the last thing inside of the display result (calcMemory)
+function clearSingleValue() {
+    clearButton.addEventListener('click', clearLastValue);
+}
+
+function clearLastValue() {
+    if (displayHolder.length >= 2){
+        displayResult.textContent = "";
+        noComma = "";
+        mustBeNumber = false;
+    }
 }
 
 
@@ -69,7 +85,7 @@ function equalOperation() {
         return;
         //prevents user from hitting enter button if they have only input one number total
         // look at first if statement in numInputHolder() to see why
-    } else if (!operatorSign) {
+    } else if (!operatorSign || noComma == "") {
         return;
         //When doing more than one operation (on two nums) BEFORE hitting enter, if a user trys to hit enter without entering the second number,
         //the equal button will return
@@ -125,10 +141,10 @@ function additionOperation() {
         waitSecondInput = false;
         returnValue = operate(displayHolder[1], displayHolder[0], displayHolder[2]);
         calcMemory.push(returnValue);
-        returnValue = 0;
         calcMemory.push(displayOperator);
         const holderValueTwo = displayHolder.join("");
         inputDisplay.textContent = holderValueTwo;
+        displayResult.textContent = returnValue;
         secondInputArray = [];
         //adds operator to calcMemory array after user operates (hits enter) on two previous numbers
     } else if (equalAfterEnter) {

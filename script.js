@@ -26,6 +26,14 @@ let returnValue;
 let equalAfterEnter = false;
 
 
+// //When a user operates on the first two numbers entered and hits equals, then
+// //hits the single clear button. This boolean will alter the state of the last else
+// // statement inside of the numInputFunction.  This is done in order to clear the original displayHolder, while making
+// //it look like (in the display input div) the original display input (before hitting the single clear) is still there.
+// let tempDisplayHoldClear = false;
+// let tempDisplayClearArr = [];
+
+
 numPadListen();
 multiplyOperatorListen();
 divisionOperatorListen();
@@ -33,7 +41,7 @@ additionOperatorListen();
 subtractionOperatorListen();
 equalOperatorListen();
 clearAllButtonListen();
-clearSingleValue();
+// clearSingleValue();
 
 
 
@@ -58,21 +66,25 @@ function clearEverything() {
     equalAfterEnter = false;
     displayOperator = undefined;
     mustBeOperator = false;
+    allowDecimalPerInput = true;
 }
 
 
 //clears the last thing inside of the display result (calcMemory)
-function clearSingleValue() {
-    clearButton.addEventListener('click', clearLastValue);
-}
+// function clearSingleValue() {
+//     clearButton.addEventListener('click', clearLastValue);
+// }
 
-function clearLastValue() {
-    if (displayHolder.length >= 2){
-        displayResult.textContent = "";
-        noComma = "";
-        mustBeNumber = false;
-    }
-}
+// function clearLastValue() {
+
+//     if (displayHolder.includes("Error") && displayHolder[displayHolder.length - 1]) {
+
+//     } else {
+
+
+//     }
+//     // } else if ()
+// }
 
 
 function equalOperatorListen() {
@@ -477,9 +489,11 @@ function numInputHolder(event) {
         if (value !== ".") {
             +value
         }
-        if (!isDecimalAllowed(value)) {
-            return;
-        };
+        if (value == ".") {
+            if (!isDecimalAllowed(value)) {
+                return;
+            };
+        }
         const type = typeof noComma;
         // console.log(+this.textContent);
         // console.log(type);
@@ -492,13 +506,10 @@ function numInputHolder(event) {
         //inputDisplay.textContent = `${noComma.toLocaleString("en-US")}`;
         displayResult.textContent = `${noComma.toLocaleString("en-US")}`;
         console.log(`noComma var length: ${noComma.toString().length}`);
-
     }
 
 
-
 }
-
 
 
 function isDecimalAllowed(val) {
@@ -581,7 +592,7 @@ function operate(symbol, numOne, numTwo) {
             const divideResult = divide(numOne, numTwo);
             return divideResult;
         default:
-            return "It was none of these!";
+            return "Find and fix the error!";
 
     }
 

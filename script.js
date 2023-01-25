@@ -24,6 +24,7 @@ let operatorSign;
 let firstInputNum;
 let returnValue;
 let equalAfterEnter = false;
+let tempInputDisplayValue
 
 
 // //When a user operates on the first two numbers entered and hits equals, then
@@ -117,24 +118,13 @@ function equalOperation() {
         displayResult.textContent = calcMemory.join("");
         equalAfterEnter = true;
     } else {
-        allowDecimalPerInput = true; //allow user to enter decimal again
-        noComma = +noComma;
         let displayOperator = this.textContent;
-        displayHolder.push(noComma);
-        displayHolder.push(displayOperator)
-        equalAfterEnter = true;
-        returnValue = operate(operatorSign, firstInputNum, noComma);
-        let tempInputDisplayValue = displayHolder.join("");
-        displayHolder.push(returnValue);
-        noComma = 0;
-        calcMemory.push(returnValue);
-        calcMemory.toLocaleString;
-        waitSecondInput = false;
-        displayResult.textContent = calcMemory.join("");
-        inputDisplay.textContent = tempInputDisplayValue;
+        twoNumberOperation(displayOperator);
     }
 
 }
+
+
 
 function additionOperatorListen() {
     additionOperator.addEventListener('click', additionOperation)
@@ -189,20 +179,13 @@ function additionOperation() {
         inputDisplay.textContent = displayHolder.join("");
         displayResult.textContent = returnValue;
     } else {
-        allowDecimalPerInput = true; //allow user to enter decimal again
-        mustBeNumber = false;
-        waitSecondInput = true;
-        console.log(`noComma var length: ${noComma.toString().length}`);
-        displayHolder.unshift(+noComma);
-        displayHolder.splice(1);
-        //noComma = 0;
-        displayOperator = this.textContent;
-        displayHolder.push(displayOperator);
-        const holderValue = displayHolder.join("");
-        inputDisplay.textContent = holderValue.toLocaleString("en-US");
-        displayResult.textContent = +noComma;
+        let that = this;
+        firstAdditionOperator(that);
+
     }
 }
+
+
 
 
 
@@ -418,34 +401,9 @@ function numPadListen() {
 
 function numInputHolder(event) {
     if (waitSecondInput) {
-        mustBeNumber = true;
-        //noComma = tempArray.join(" ");
+        let that = this;
         let secondInputValue = this.textContent;
-        if (secondInputValue !== ".") {
-            +secondInputValue
-        }
-        //first if checks if decimal even exists, second if checks if it is allowed
-        if (secondInputValue == ".") {
-            if (!isDecimalAllowed(secondInputValue)) {
-                return;
-            };
-        }
-        secondInputArray.push(secondInputValue);
-        noComma = secondInputArray.join("");
-        const type = typeof value;
-        // console.log(+this.textContent);
-        // console.log(type);
-        //displayHolder.push(value);
-        secondTempArray = [];
-        secondTempArray = secondTempArray.concat(displayHolder);
-        firstInputNum = secondTempArray[0];
-        console.log(typeof (firstInputNum));
-        operatorSign = secondTempArray[1];
-        //let valueThree = tempArray[2];
-        inputDisplay.textContent = firstInputNum + "" + operatorSign + "";
-        displayResult.textContent = noComma;
-        //noComma = `${valueOne} ${valueTwo} ${valueThree}`;
-        // waitSecondInput = false;
+        secondNumInput(that, secondInputValue);
     } else if (calcMemory.length >= 1 && equalAfterEnter) {
         mustBeNumber = true;
         //allows user to hit enter button again since they have selected a number
@@ -485,13 +443,13 @@ function numInputHolder(event) {
         displayResult.textContent = noComma;
     } else {
         let value = this.textContent;
-        //takes the first number input when a user clicks a number
         firstNumInput(value);
     }
 
 
 }
 
+//takes the first number input when a user clicks a number
 function firstNumInput(value) {
     mustBeNumber = true;
     if (value !== ".") {
@@ -514,6 +472,73 @@ function firstNumInput(value) {
     //inputDisplay.textContent = `${noComma.toLocaleString("en-US")}`;
     displayResult.textContent = `${noComma.toLocaleString("en-US")}`;
     console.log(`noComma var length: ${noComma.toString().length}`);
+}
+
+//adds the addition operator to the equation, part of the first operation
+function firstAdditionOperator(that) {
+    allowDecimalPerInput = true; //allow user to enter decimal again
+    mustBeNumber = false;
+    waitSecondInput = true;
+    console.log(`noComma var length: ${noComma.toString().length}`);
+    displayHolder.unshift(+noComma);
+    displayHolder.splice(1);
+    //noComma = 0;
+    displayOperator = that.textContent;
+    displayHolder.push(displayOperator);
+    const holderValue = displayHolder.join("");
+    inputDisplay.textContent = holderValue.toLocaleString("en-US");
+    displayResult.textContent = +noComma;
+}
+
+
+//takes the second number input when a user clicks a number button
+function secondNumInput(that, secondInputValue) {
+    mustBeNumber = true;
+    //noComma = tempArray.join(" ");
+    if (secondInputValue !== ".") {
+        +secondInputValue
+    }
+    //first if checks if decimal even exists, second if checks if it is allowed
+    if (secondInputValue == ".") {
+        if (!isDecimalAllowed(secondInputValue)) {
+            return;
+        };
+    }
+    secondInputArray.push(secondInputValue);
+    noComma = secondInputArray.join("");
+    const type = typeof value;
+    // console.log(+this.textContent);
+    // console.log(type);
+    //displayHolder.push(value);
+    secondTempArray = [];
+    secondTempArray = secondTempArray.concat(displayHolder);
+    firstInputNum = secondTempArray[0];
+    console.log(typeof (firstInputNum));
+    operatorSign = secondTempArray[1];
+    //let valueThree = tempArray[2];
+    inputDisplay.textContent = firstInputNum + "" + operatorSign + "";
+    displayResult.textContent = noComma;
+    //noComma = `${valueOne} ${valueTwo} ${valueThree}`;
+    // waitSecondInput = false;
+}
+
+//If operating on just two numbers and user hits enter, operate on the two numbers and return the result
+function twoNumberOperation(displayOperator) {
+    allowDecimalPerInput = true; //allow user to enter decimal again
+    noComma = +noComma;
+    displayHolder.push(noComma);
+    displayHolder.push(displayOperator)
+    equalAfterEnter = true;
+    returnValue = operate(operatorSign, firstInputNum, noComma);
+    //for displaying the current input values before the result is added to it
+    tempInputDisplayValue = displayHolder.join("");
+    displayHolder.push(returnValue);
+    noComma = 0;
+    calcMemory.push(returnValue);
+    calcMemory.toLocaleString;
+    waitSecondInput = false;
+    displayResult.textContent = calcMemory.join("");
+    inputDisplay.textContent = tempInputDisplayValue;
 }
 
 

@@ -8,7 +8,7 @@ let subtractionOperator = document.querySelector('.subtract');
 let divisionOperator = document.querySelector('.divide');
 let equalSign = document.querySelector('.equalSign');
 let clearAllButton = document.querySelector('.clearAllButton');
-let clearButton = document.querySelector('.deleteButton');
+let backspaceButton = document.querySelector('.deleteButton');
 let displayOperator;
 let mustBeNumber = false //variable used to make sure user cannot enter an operator twice
 //Not being used, equalAfterEnter boolean doing the same thing.
@@ -43,7 +43,7 @@ additionOperatorListen();
 subtractionOperatorListen();
 equalOperatorListen();
 clearAllButtonListen();
-// clearSingleValue();
+clearSingleValue();
 
 
 
@@ -73,20 +73,24 @@ function clearEverything() {
 
 
 //clears the last thing inside of the display result (calcMemory)
-// function clearSingleValue() {
-//     clearButton.addEventListener('click', clearLastValue);
-// }
+function clearSingleValue() {
+    backspaceButton.addEventListener('click', clearLastValue);
+}
 
-// function clearLastValue() {
-
-//     if (displayHolder.includes("Error") && displayHolder[displayHolder.length - 1]) {
-
-//     } else {
-
-
-//     }
-//     // } else if ()
-// }
+//clears the last value entered. If user has hit the equals button, it will completely reset the calculator
+function clearLastValue() {
+    if (waitSecondInput) {
+        secondInputArray.pop();
+        noComma = secondInputArray.join("");
+        displayResult.textContent = noComma;
+    } else if (calcMemory.length >= 1 && noComma) {
+        secondInputArray.pop();
+        noComma = secondInputArray.join("");
+        displayResult.textContent = noComma;
+    } else if (equalAfterEnter) {
+        clearEverything();
+    }
+}
 
 
 function equalOperatorListen() {

@@ -89,6 +89,11 @@ function clearLastValue() {
         displayResult.textContent = noComma;
     } else if (equalAfterEnter) {
         clearEverything();
+    } else {
+        displayHolder.pop();
+        firstTempArray.pop();
+        noComma = firstTempArray.join("");
+        displayResult.textContent = noComma;
     }
 }
 
@@ -468,6 +473,19 @@ function isDecimalAllowed(val) {
     return true
 }
 
+function roundBigNums(sum) {
+    let numAsString = sum.toString();
+    let decimalIndex = numAsString.indexOf(".");
+    //-1 means value not found, checking opposite of this here
+    if (decimalIndex !== -1) {
+        let splitStringNum = numAsString.split(".");
+        if (splitStringNum[1].length > 4) {
+            return sum.toFixed(4);
+        }
+    } else {
+        return +sum;
+    }
+}
 
 function add(...args) {
     if (typeof (args[0]) == "string" || typeof (args[1]) == "string") {
@@ -478,7 +496,7 @@ function add(...args) {
         return previousValue + currentValue;
     }, 0);
 
-    return sum;
+    return roundBigNums(sum);
 };
 
 function subtract(...args) {
@@ -490,7 +508,7 @@ function subtract(...args) {
         return previousValue - currentValue;
     })
 
-    return sum;
+    return roundBigNums(sum);
 }
 
 function multiply(...args) {
@@ -502,7 +520,7 @@ function multiply(...args) {
         return previousValue * currentValue;
     })
 
-    return sum;
+    return roundBigNums(sum);
 }
 
 function divide(...args) {
@@ -519,7 +537,7 @@ function divide(...args) {
     } else if (!isFinite(sum)) {
         return 'Error'
     } else {
-        return sum;
+        return roundBigNums(sum);
     }
 
 }

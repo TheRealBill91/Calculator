@@ -1,7 +1,7 @@
 let displayOutputContainer = document.querySelector('.displayOutputContainer');
 let inputDisplay = document.querySelector('.displayInputPara');
 let displayResult = document.querySelector('.displayResultPara');
-let numberPad = document.querySelectorAll('.numberPad');
+let inputPad = document.querySelectorAll('.inputPad');
 let multiplyOperator = document.querySelector('.multiply');
 let additionOperator = document.querySelector('.add');
 let subtractionOperator = document.querySelector('.subtract');
@@ -44,6 +44,8 @@ subtractionOperatorListen();
 equalOperatorListen();
 clearAllButtonListen();
 clearSingleValue();
+initializeMouseDown();
+initializeMouseUp();
 
 
 
@@ -80,9 +82,10 @@ function clearSingleValue() {
 //clears the last value entered. If user has hit the equals button, it will completely reset the calculator
 function clearLastValue() {
     let removedValue;
+
     if (waitSecondInput) {
         removedValue = secondInputArray.pop();
-        if (removedValue == "." ){
+        if (removedValue == ".") {
             allowDecimalPerInput = true;
         }
         noComma = secondInputArray.join("");
@@ -262,7 +265,7 @@ function divisionOperation() {
 
 
 function numPadListen() {
-    numberPad.forEach(num => num.addEventListener('click', numInputHolder));
+    inputPad.forEach(num => num.addEventListener('click', numInputHolder));
 
 }
 
@@ -575,7 +578,22 @@ function operate(symbol, numOne, numTwo) {
 
 }
 
+function initializeMouseDown() {
+    inputPad.forEach(inputPad => inputPad.addEventListener("mousedown", addButtonEffect));
+}
 
+function initializeMouseUp(){
+    inputPad.forEach(inputPad => inputPad.addEventListener("mouseup", removeButtonEffect ))
+}
+
+function removeButtonEffect(event){
+    event.target.classList.remove("buttonPressEffect")
+}
+
+function addButtonEffect(event) {
+    event.target.classList.add("buttonPressEffect");
+    // console.log(event.target.classList);
+}
 
 
 // console.log(operate("-", 2, 4));

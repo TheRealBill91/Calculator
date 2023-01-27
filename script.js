@@ -79,18 +79,28 @@ function clearSingleValue() {
 
 //clears the last value entered. If user has hit the equals button, it will completely reset the calculator
 function clearLastValue() {
+    let removedValue;
     if (waitSecondInput) {
-        secondInputArray.pop();
+        removedValue = secondInputArray.pop();
+        if (removedValue == "." ){
+            allowDecimalPerInput = true;
+        }
         noComma = secondInputArray.join("");
         displayResult.textContent = noComma;
     } else if (calcMemory.length >= 1 && noComma) {
-        secondInputArray.pop();
+        removedValue = secondInputArray.pop();
+        if (removedValue == ".") {
+            allowDecimalPerInput = true;
+        }
         noComma = secondInputArray.join("");
         displayResult.textContent = noComma;
     } else if (equalAfterEnter) {
         clearEverything();
     } else {
-        displayHolder.pop();
+        removedValue = displayHolder.pop();
+        if (removedValue == ".") {
+            allowDecimalPerInput = true;
+        }
         firstTempArray.pop();
         noComma = firstTempArray.join("");
         displayResult.textContent = noComma;

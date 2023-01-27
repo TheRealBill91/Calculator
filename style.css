@@ -34,8 +34,8 @@ body {
 
 .calcOutline {
     /* border: 2px solid black; */
-    width: 399px;
-    height: 710px;
+    width: 360px;
+    height: 527px;
     display: flex;
     justify-content: center;
     align-items: normal;
@@ -43,7 +43,6 @@ body {
     background-color: rgba(50, 63, 177, 0.616);
     border-radius: 10px;
     box-shadow: 10px 10px 8px #868686de;
-      
     /* gap: 4px; */
 }
 
@@ -98,7 +97,7 @@ body {
 .displayInputPara::-webkit-scrollbar {
     width: 10px;
     height: 3px;
-    background-color: rgb(255, 255, 255);
+    background-color: whitesmoke;
 }
 
 .displayInputPara::-webkit-scrollbar-thumb {
@@ -146,7 +145,7 @@ body {
 .displayResultPara::-webkit-scrollbar {
     width: 10px;
     height: 3px;
-    background-color: rgb(255, 255, 255);
+    background-color: whitesmoke;
 }
 
 .displayResultPara::-webkit-scrollbar-thumb {
@@ -158,7 +157,7 @@ body {
 
 
 .decimal, .equalSign {
-    width: 180px;
+    width: 160px;
 }
 
 .buttonContainer {
@@ -170,8 +169,8 @@ body {
 }
 
 button {
-    width: 84.25px;
-    height: 103.4px;
+    width: 73.25px;
+    height: 65.4px;
     border: 1px solid rgb(95, 95, 95);
     word-wrap: break-word;
     display: flex;
@@ -179,7 +178,15 @@ button {
     align-items: center;
     font-size: 24px;
     border-radius: 10px;
-    box-shadow:  6px 4px 8px #6161618f;
+    box-shadow: 6px 4px 8px #6161618f;
     background-color: rgb(218, 218, 218);
-    
+}
+
+footer {
+    margin-top: 2rem;
+    height: 60px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

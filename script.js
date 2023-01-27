@@ -481,6 +481,8 @@ function roundBigNums(sum) {
         let splitStringNum = numAsString.split(".");
         if (splitStringNum[1].length > 4) {
             return sum.toFixed(4);
+        } else {
+            return +sum;
         }
     } else {
         return +sum;

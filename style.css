@@ -1,5 +1,6 @@
 html {
     box-sizing: border-box;
+    background-color: rgba(76, 88, 194, 0.493);
 }
 
 html body {
@@ -9,7 +10,8 @@ html body {
 
 body {
     margin: 0;
-    height: 100vh;
+    /* This will cause the scrollbar to appear on the page (Do not want that in this project) */
+    /* height: 100vh;   */
 }
 
 *,
@@ -26,72 +28,80 @@ body {
     justify-content: center;
     align-items: center;
     /* height: 100vh; */
-    border: 2px solid red;
-    margin-top: 2rem;
-
+    /* border: 2px solid red; */
+    margin-top: 4rem;
 }
 
 .calcOutline {
-    border: 2px solid black;
-    width: 305px;
-    height: 475px;
+    /* border: 2px solid black; */
+    width: 399px;
+    height: 710px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: normal;
     flex-wrap: wrap;
-    gap: 4px;
+    background-color: rgba(50, 63, 177, 0.616);
+    border-radius: 10px;
+    box-shadow: 10px 10px 8px #868686de;
+      
+    /* gap: 4px; */
 }
 
 .displayOutputContainer {
-    border: 2px solid rgb(166, 166, 166);
-    width: 350px;
-    height: 96px;
+    /* border: 1px solid rgb(166, 166, 166); */
+    width: 394px;
+    height: 126px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     font-size: 42px;
     align-items: flex-end;
     align-self: flex-start;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    margin: 5px;
+    margin: 10px 14px 4px 14px ;
+    box-shadow: inset 4px 6px 12px #a5a5a5dc;
+      
 }
 
 .displayInputContainer {
-    /* width: 150px;
-    height: 50px; */
-    min-width: 155px;
-    max-width: 200px;
+    min-width: 201px;
+    max-width: 300px;
     display: flex;
-    border: 2px solid orange;
+    /* border: 2px solid orange; */
     justify-content: flex-end;
-
 }
 
-.displayInput {
+.displayInputPara {
     width: fit-content;
-    min-width: 155px;
-    max-width: 200px;
-    height: 45px;
+    min-width: 90px;
+    max-width: 250px;
+    height: 60px;
     margin: 0;
     /* display: flex; */
     align-items: flex-end;
     align-self: flex-end;
     justify-content: flex-end;
-    border: 2px solid rgb(177, 218, 65);
+    /* border: 2px solid rgb(177, 218, 65); */
     justify-content: flex-end;
     align-items: flex-end;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
-    font-size: 28px;
+    font-size: 36px;
     color: rgb(95, 95, 95);
+    padding-right: 6px;
+    padding-top: 6px;
 }
 
-.displayInput::-webkit-scrollbar {
+.displayInputPara::-webkit-scrollbar {
     width: 10px;
     height: 3px;
     background-color: rgb(255, 255, 255);
 }
 
-.displayInput::-webkit-scrollbar-thumb {
+.displayInputPara::-webkit-scrollbar-thumb {
     /* width: 10px; */
     /* height: 10px; */
     background-color: rgb(165, 165, 165);
@@ -102,23 +112,44 @@ body {
     /* width: 155px; */
     min-width: 155px;
     max-width: 200px;
-    height: 45px;
-    border: 1px solid blue;
-    /* display: flex; */  /* Removes ability to use overflow scrool */
+    height: 58px;
+    /* border: 1px solid blue; */
+    justify-content: flex-end;
+    align-items: flex-end;
+    white-space: nowrap;
+    margin: 3px;
+    display: flex;
+}
+
+.displayResultPara {
+    width: fit-content;
+    min-width: 45px;
+    max-width: 225px;
+    height: 55px;
+    margin: 0;
+    /* display: flex; */
+    align-items: flex-end;
+    align-self: flex-end;
+    justify-content: flex-end;
+    /* border: 2px solid rgb(202, 149, 50); */
     justify-content: flex-end;
     align-items: flex-end;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
+    font-size: 48px;
+    color: rgb(95, 95, 95);
 }
 
-.displayResult::-webkit-scrollbar {
+
+
+.displayResultPara::-webkit-scrollbar {
     width: 10px;
     height: 3px;
     background-color: rgb(255, 255, 255);
 }
 
-.displayResult::-webkit-scrollbar-thumb {
+.displayResultPara::-webkit-scrollbar-thumb {
     /* width: 10px; */
     /* height: 10px; */
     background-color: rgb(165, 165, 165);
@@ -127,17 +158,28 @@ body {
 
 
 .decimal, .equalSign {
-    width: 143px;
+    width: 180px;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    height: fit-content;
 }
 
 button {
-    width: 69.25px;
-    height: 69.4px;
+    width: 84.25px;
+    height: 103.4px;
     border: 1px solid rgb(95, 95, 95);
     word-wrap: break-word;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 24px;
-    border-radius: 2px;
+    border-radius: 10px;
+    box-shadow:  6px 4px 8px #6161618f;
+    background-color: rgb(218, 218, 218);
+    
 }

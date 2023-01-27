@@ -44,8 +44,8 @@ subtractionOperatorListen();
 equalOperatorListen();
 clearAllButtonListen();
 clearSingleValue();
-initializeMouseDown();
-initializeMouseUp();
+// initializeMouseDown();
+// initializeMouseUp();
 
 
 
@@ -269,7 +269,7 @@ function numPadListen() {
 
 }
 
-function numInputHolder(event) {
+function numInputHolder() {
     if (mustBeOperator) {
         return;
     } else if (waitSecondInput) {
@@ -578,22 +578,24 @@ function operate(symbol, numOne, numTwo) {
 
 }
 
-function initializeMouseDown() {
-    inputPad.forEach(inputPad => inputPad.addEventListener("mousedown", addButtonEffect));
-}
+//You're going to have to create seperate query selctors for numberPad buttons and non numberPad buttons!
 
-function initializeMouseUp(){
-    inputPad.forEach(inputPad => inputPad.addEventListener("mouseup", removeButtonEffect ))
-}
+// function initializeMouseDown() {
+//     inputPad.forEach(inputPad => inputPad.addEventListener("mousedown", addButtonEffect));
+// }
 
-function removeButtonEffect(event){
-    event.target.classList.remove("buttonPressEffect")
-}
+// function initializeMouseUp(){
+//     inputPad.forEach(inputPad => inputPad.addEventListener("mouseup", removeButtonEffect ))
+// }
 
-function addButtonEffect(event) {
-    event.target.classList.add("buttonPressEffect");
-    // console.log(event.target.classList);
-}
+// function removeButtonEffect(event){
+//     event.target.classList.remove("buttonPressEffect")
+// }
+
+// function addButtonEffect(event) {
+//     event.target.classList.add("buttonPressEffect");
+//     // console.log(event.target.classList);
+// }
 
 
 // console.log(operate("-", 2, 4));

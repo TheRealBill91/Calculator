@@ -12,14 +12,14 @@ body {
     margin: 0;
     /* This will cause the scrollbar to appear on the page (Do not want that in this project) */
     /* height: 100vh;   */
-    min-height: 100vh;
+   
 }
 
-main {
+.wrapper {
     min-height: 100vh;
     overflow: hidden;
-    /* display: flex;
-    flex-direction: column; */
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -36,9 +36,10 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex: 1;
     /* height: 100vh; */
     /* border: 2px solid red; */
-    margin-top: 4rem;
+    margin-top: 2rem;
 }
 
 .calcOutline {
@@ -221,3 +222,157 @@ footer {
 .operatorEffect {
     background-color: rgb(49, 49, 49);
 }
+
+@media only screen and (max-device-width: 812px) {
+    .wrapper {
+        min-height: 100vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .calcHolder {
+        /* border: 2px solid black; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+        /* height: 100vh; */
+        /* border: 2px solid red; */
+        margin-top: 2rem;
+    }
+
+    .calcOutline {
+        /* border: 2px solid black; */
+        width: 869px;
+        height: 94rem;
+        display: flex;
+        justify-content: center;
+        align-items: normal;
+        flex-wrap: wrap;
+        background-color: rgba(50, 63, 177, 0.616);
+        border-radius: 10px;
+        box-shadow: 10px 10px 8px #868686de;
+        /* gap: 4px; */
+    }
+    
+    .displayOutputContainer {
+        /* border: 1px solid rgb(166, 166, 166); */
+        width: 739px;
+        height: 271px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        font-size: 42px;
+        align-items: flex-end;
+        align-self: flex-start;
+        background-color: whitesmoke;
+        border-radius: 10px;
+        margin: 5px;
+        margin: 36px 14px 16px 14px;
+        box-shadow: inset 4px 6px 12px #a5a5a5dc;
+    }
+
+    .displayInputContainer {
+        min-width: 234px;
+        max-width: 431px;
+        display: flex;
+        /* border: 2px solid orange; */
+        justify-content: flex-end;
+    }
+
+    .displayInputPara {
+        width: fit-content;
+        min-width: 106px;
+        max-width: 371px;
+        height: 136px;
+        margin: 0;
+        /* display: flex; */
+        align-items: flex-end;
+        align-self: flex-end;
+        justify-content: flex-end;
+        /* border: 2px solid rgb(177, 218, 65); */
+        justify-content: flex-end;
+        align-items: flex-end;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+        font-size: 76px;
+        color: rgb(95, 95, 95);
+        padding-right: 6px;
+        padding-top: 6px;
+    }
+
+    .displayResult {
+        /* width: 155px; */
+        min-width: 201px;
+        max-width: 390px;
+        height: 128px;
+        /* border: 1px solid blue; */
+        justify-content: flex-end;
+        align-items: flex-end;
+        white-space: nowrap;
+        margin: 3px;
+        display: flex;
+    }
+
+    .displayResultPara {
+        width: fit-content;
+        min-width: 93px;
+        max-width: 414px;
+        height: 118px;
+        margin: 0;
+        /* display: flex; */
+        align-items: flex-end;
+        align-self: flex-end;
+        justify-content: flex-end;
+        /* border: 2px solid rgb(202, 149, 50); */
+        justify-content: flex-end;
+        align-items: flex-end;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+        font-size: 114px;
+        color: rgb(95, 95, 95);
+    }
+
+    .buttonContainer {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        justify-content: center;
+        height: fit-content;
+        flex: 1;
+    }
+
+    button {
+        width: 175.25px;
+        height: 206.39999999999998px;
+        /* border: 1px solid rgb(95, 95, 95); */
+        word-wrap: break-word;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 52px;
+        border-radius: 10px;
+        transition: all .08s ease;
+        box-shadow: 6px 4px 8px #6161618f;
+        background-color: rgb(218, 218, 218);
+    }
+
+    #decimal, #equalSign {
+        width: 367px;
+    }
+
+    footer {
+        margin-top: 2rem;
+        height: 114px;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 40px;
+    }
+
+}
+

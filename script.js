@@ -45,9 +45,9 @@ subtractionOperatorListen();
 equalOperatorListen();
 clearAllButtonListen();
 clearSingleValue();
-// initializeMouseDown();
-// initializeMouseUp();
-// decimalAndNumber();
+initializeMouseDown();
+initializeMouseUp();
+
 
 
 
@@ -159,6 +159,8 @@ function equalOperation() {
 
 function additionOperatorListen() {
     additionOperator.addEventListener('click', additionOperation);
+
+    
 }
 
 function additionOperation() {
@@ -648,10 +650,24 @@ function operate(symbol, numOne, numTwo) {
 
 function initializeMouseDown() {
     numberPad.forEach(numberPad => numberPad.addEventListener("mousedown", addButtonEffect));
+    multiplyOperator.addEventListener("mousedown", addButtonEffect);
+    additionOperator.addEventListener("mousedown", addButtonEffect);
+    divisionOperator.addEventListener("mousedown", addButtonEffect);
+    subtractionOperator.addEventListener("mousedown", addButtonEffect);
+    equalSign.addEventListener("mousedown", addButtonEffect);
+    clearAllButton.addEventListener("mousedown", addButtonEffect);
+    backspaceButton.addEventListener("mousedown", addButtonEffect);
 }
 
 function initializeMouseUp() {
-    numberPad.forEach(numberPad => numberPad.addEventListener("mouseup", removeButtonEffect))
+    numberPad.forEach(numberPad => numberPad.addEventListener("mouseup", removeButtonEffect));
+    multiplyOperator.addEventListener("mouseup", removeButtonEffect);
+    additionOperator.addEventListener("mouseup", removeButtonEffect);
+    divisionOperator.addEventListener("mouseup", removeButtonEffect);
+    subtractionOperator.addEventListener("mouseup", removeButtonEffect);
+    equalSign.addEventListener("mouseup", removeButtonEffect);
+    clearAllButton.addEventListener("mouseup", removeButtonEffect);
+    backspaceButton.addEventListener("mouseup", removeButtonEffect);
 }
 
 function removeButtonEffect(event) {

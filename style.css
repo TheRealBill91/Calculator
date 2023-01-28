@@ -290,7 +290,7 @@ footer {
 
     .displayInputContainer {
         min-width: 234px;
-        max-width: 500px;
+        max-width: 600px;
         display: flex;
         /* border: 2px solid orange; */
         justify-content: flex-end;
@@ -299,7 +299,7 @@ footer {
     .displayInputPara {
         width: fit-content;
         min-width: 106px;
-        max-width: 500px;
+        max-width: 600px;
         height: 136px;
         margin: 0;
         /* display: flex; */
@@ -318,10 +318,24 @@ footer {
         padding-top: 6px;
     }
 
+    .displayInputPara::-webkit-scrollbar {
+        width: 10px;
+        height: 3px;
+        background-color: whitesmoke;
+    }
+    
+    .displayInputPara::-webkit-scrollbar-thumb {
+        /* width: 10px; */
+        /* height: 10px; */
+        background-color: rgb(165, 165, 165);
+        border-radius: 5px;
+    }
+    
+
     .displayResult {
         /* width: 155px; */
         min-width: 201px;
-        max-width: 500px;
+        max-width: 600px;
         height: 128px;
         /* border: 1px solid blue; */
         justify-content: flex-end;
@@ -334,7 +348,7 @@ footer {
     .displayResultPara {
         width: fit-content;
         min-width: 93px;
-        max-width: 500px;
+        max-width: 600px;
         height: 128px;
         margin: 0;
         /* display: flex; */
@@ -349,6 +363,19 @@ footer {
         white-space: nowrap;
         font-size: 114px;
         color: rgb(95, 95, 95);
+    }
+
+    .displayResultPara::-webkit-scrollbar {
+        width: 10px;
+        height: 3px;
+        background-color: whitesmoke;
+    }
+    
+    .displayResultPara::-webkit-scrollbar-thumb {
+        /* width: 10px; */
+        /* height: 10px; */
+        background-color: rgb(165, 165, 165);
+        border-radius: 5px;
     }
 
     .buttonContainer {

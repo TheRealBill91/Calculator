@@ -470,6 +470,7 @@ function operateAndReturn(displayOperator) {
         calcMemory.pop();
         return;
     }
+    secondInputArray = []; 
     displayHolder.push(displayOperator);
     noComma = 0;
     returnValue = operate(calcMemory[1], calcMemory[0], calcMemory[2]);

@@ -15,7 +15,7 @@ body {
     min-height: 100vh;
 }
 
-main{
+main {
     min-height: 100vh;
     overflow: hidden;
     /* display: flex;
@@ -70,7 +70,7 @@ main{
     margin: 5px;
     margin: 12px 16px 4px 16px;
     box-shadow: inset 4px 6px 12px #a5a5a5dc;
-      
+
 }
 
 
@@ -166,7 +166,8 @@ main{
 }
 
 
-#decimal, #equalSign {
+#decimal,
+#equalSign {
     width: 156px;
 }
 
@@ -179,7 +180,7 @@ main{
 }
 
 
-.buttonPressEffect{
+.buttonPressEffect {
     background-color: rgb(92, 92, 92);
     color: white;
     border-color: rgba(50, 63, 177, 0.616);
@@ -211,4 +212,12 @@ footer {
     align-items: center;
     font-size: 20px;
 
+}
+
+.numPadEffect {
+    background-color: rgb(49, 49, 49);
+}
+
+.operatorEffect {
+    background-color: rgb(49, 49, 49);
 }

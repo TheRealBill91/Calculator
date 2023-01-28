@@ -1,7 +1,7 @@
 let displayOutputContainer = document.querySelector('.displayOutputContainer');
 let inputDisplay = document.querySelector('.displayInputPara');
 let displayResult = document.querySelector('.displayResultPara');
-let inputPad = document.querySelectorAll('.inputPad');
+let numberPad = document.querySelectorAll('.numberPad');
 let multiplyOperator = document.querySelector('.multiply');
 let additionOperator = document.querySelector('.add');
 let subtractionOperator = document.querySelector('.subtract');
@@ -18,6 +18,7 @@ let displayHolder = [];
 let calcMemory = [];
 let noComma;
 let firstTempArray;
+let tempArr = []; 
 let secondInputArray = [];
 let waitSecondInput = false;
 let operatorSign;
@@ -46,6 +47,7 @@ clearAllButtonListen();
 clearSingleValue();
 // initializeMouseDown();
 // initializeMouseUp();
+// decimalAndNumber();
 
 
 
@@ -82,7 +84,9 @@ function clearSingleValue() {
 //clears the last value entered. If user has hit the equals button, it will completely reset the calculator
 function clearLastValue() {
     let removedValue;
-
+    if (!mustBeNumber) {
+        return;
+    }
     if (waitSecondInput) {
         removedValue = secondInputArray.pop();
         if (removedValue == ".") {
@@ -128,6 +132,10 @@ function equalOperation() {
     } else if (!mustBeNumber) {
         return;
     } else if (calcMemory.length >= 1 && noComma) {
+        tempArr.push(noComma);
+        if (!decimalAndNumber()) {
+            return;
+        }
         allowDecimalPerInput = true; //allow user to enter decimal again
         displayHolder.push(+noComma);
         calcMemory.push(+noComma);
@@ -150,10 +158,11 @@ function equalOperation() {
 
 
 function additionOperatorListen() {
-    additionOperator.addEventListener('click', additionOperation)
+    additionOperator.addEventListener('click', additionOperation);
 }
 
 function additionOperation() {
+    // additionOperator.classList.add('')
     if (!mustBeNumber) {
         return; //returns if user trys to enter subtract button twice without first entering a number
     } else if (displayHolder.length > 1 && waitSecondInput) {
@@ -265,7 +274,7 @@ function divisionOperation() {
 
 
 function numPadListen() {
-    inputPad.forEach(num => num.addEventListener('click', numInputHolder));
+    numberPad.forEach(num => num.addEventListener('click', numInputHolder));
 
 }
 
@@ -334,11 +343,19 @@ function firstNumInput(value) {
 
 //adds the specific operator to the equation, part of the first operation (before any calcMemory or equals)
 function insertFirstOperator(that) {
+    if (!decimalAndNumber()) {
+        return;
+    }
     allowDecimalPerInput = true; //allow user to enter decimal again
     mustBeNumber = false;
     waitSecondInput = true;
     console.log(`noComma var length: ${noComma.toString().length}`);
-    displayHolder.unshift(+noComma);
+    if (noComma !== ".") {
+        displayHolder.unshift(+noComma);
+    } else {
+        displayHolder.unshift(noComma);
+    }
+
     displayHolder.splice(1);
     //noComma = 0;
     displayOperator = that.textContent;
@@ -382,6 +399,15 @@ function secondNumInput(that, secondInputValue) {
 
 //If operating on just two numbers and user hits enter, operate on the two numbers and return the result
 function twoNumberOperation(displayOperator) {
+    tempArr = [] //used to check if second input contains number AND decimal (not just decimal)
+    tempArr.push(noComma);
+    if (!decimalAndNumber()) {
+        // mustBeNumber = true;
+        // allowDecimalPerInput = false;
+        // displayHolder.pop();
+        // calcMemory.pop();
+        return;
+    }
     mustBeOperator = true;
     allowDecimalPerInput = true; //allow user to enter decimal again
     noComma = +noComma;
@@ -427,9 +453,20 @@ function operateAndReturn(displayOperator) {
     allowDecimalPerInput = true; //allow user to enter decimal again
     mustBeNumber = false;
     secondInputArray = [];
-    if (noComma) {
+    secondInputArray.push(noComma);
+    if (noComma && noComma !== ".") {
         displayHolder.push(+noComma);
         calcMemory.push(+noComma);
+    } else {
+        displayHolder.push(noComma);
+        calcMemory.push(noComma);
+    }
+    if (!decimalAndNumber()) {
+        mustBeNumber = true;
+        allowDecimalPerInput = false;
+        displayHolder.pop();
+        calcMemory.pop();
+        return;
     }
     displayHolder.push(displayOperator);
     noComma = 0;
@@ -484,6 +521,35 @@ function isDecimalAllowed(val) {
         allowDecimalPerInput = false;
     }
     return true
+}
+
+//If a user enters a decimal but no button, and tries to operate, this function will return 
+//when the user presses an operator button until they also select a number (with the decimal)
+function decimalAndNumber() {
+    let arrHasNum = displayHolder.some(val => !isNaN(val) && val !== "."); //used in first if
+    let arrTwoHasNum = tempArr.some(val => !isNaN(val) && val !== "."); //used in second if
+    let arrThreeHasNum = secondInputArray.some(val => !isNaN(val) && val !== "."); //used in third if
+
+    if (displayHolder.length < 2) {
+        if (displayHolder.includes(".") && !arrHasNum) {
+            return false
+        } else {
+            return true;
+        }
+    } else if (displayHolder.length >= 2 && displayHolder.length < 4) {
+        if (tempArr.includes(".") && !arrTwoHasNum) {
+            return false;
+        } else {
+            return true;
+        }
+    } else {
+        if (secondInputArray.includes(".") && !arrThreeHasNum) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }
 
 function roundBigNums(sum) {
@@ -580,22 +646,23 @@ function operate(symbol, numOne, numTwo) {
 
 //You're going to have to create seperate query selctors for numberPad buttons and non numberPad buttons!
 
-// function initializeMouseDown() {
-//     inputPad.forEach(inputPad => inputPad.addEventListener("mousedown", addButtonEffect));
-// }
+function initializeMouseDown() {
+    numberPad.forEach(numberPad => numberPad.addEventListener("mousedown", addButtonEffect));
+}
 
-// function initializeMouseUp(){
-//     inputPad.forEach(inputPad => inputPad.addEventListener("mouseup", removeButtonEffect ))
-// }
+function initializeMouseUp() {
+    numberPad.forEach(numberPad => numberPad.addEventListener("mouseup", removeButtonEffect))
+}
 
-// function removeButtonEffect(event){
-//     event.target.classList.remove("buttonPressEffect")
-// }
+function removeButtonEffect(event) {
+    event.target.classList.remove("buttonPressEffect")
+}
 
-// function addButtonEffect(event) {
-//     event.target.classList.add("buttonPressEffect");
-//     // console.log(event.target.classList);
-// }
+function addButtonEffect(event) {
+    event.target.classList.add("buttonPressEffect");
+    // console.log(event.target.classList);
+}
 
+console.log(decimalAndNumber("."));
 
 // console.log(operate("-", 2, 4));

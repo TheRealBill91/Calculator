@@ -45,7 +45,7 @@ body {
 .calcOutline {
     /* border: 2px solid black; */
     width: 360px;
-    height: 527px;
+    height: 535px;
     display: flex;
     justify-content: center;
     align-items: normal;
@@ -69,7 +69,7 @@ body {
     background-color: whitesmoke;
     border-radius: 10px;
     margin: 5px;
-    margin: 12px 16px 4px 16px;
+    margin: 15px 18px 2px 18px;
     box-shadow: inset 4px 6px 12px #a5a5a5dc;
 
 }
@@ -167,7 +167,7 @@ body {
 }
 
 
-#decimal,
+#clearAll,
 #equalSign {
     width: 156px;
 }
@@ -197,6 +197,21 @@ button {
     justify-content: center;
     align-items: center;
     font-size: 24px;
+    border-radius: 10px;
+    transition: all .08s ease;
+    box-shadow: 6px 4px 8px #6161618f;
+    background-color: rgb(218, 218, 218);
+}
+
+#decimal {
+    width: 73.25px;
+    height: 65.4px;
+    border: 1px solid rgb(95, 95, 95);
+    word-wrap: break-word;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
     border-radius: 10px;
     transition: all .08s ease;
     box-shadow: 6px 4px 8px #6161618f;
@@ -251,7 +266,7 @@ footer {
         align-items: normal;
         flex-wrap: wrap;
         background-color: rgba(50, 63, 177, 0.616);
-        border-radius: 10px;
+        border-radius: 24px;
         box-shadow: 10px 10px 8px #868686de;
         /* gap: 4px; */
     }
@@ -267,15 +282,15 @@ footer {
         align-items: flex-end;
         align-self: flex-start;
         background-color: whitesmoke;
-        border-radius: 10px;
+        border-radius: 16px;
         margin: 5px;
-        margin: 36px 14px 16px 14px;
+        margin: 59px 14px 8px 14px;
         box-shadow: inset 4px 6px 12px #a5a5a5dc;
     }
 
     .displayInputContainer {
         min-width: 234px;
-        max-width: 431px;
+        max-width: 600px;
         display: flex;
         /* border: 2px solid orange; */
         justify-content: flex-end;
@@ -284,7 +299,7 @@ footer {
     .displayInputPara {
         width: fit-content;
         min-width: 106px;
-        max-width: 371px;
+        max-width: 600px;
         height: 136px;
         margin: 0;
         /* display: flex; */
@@ -303,10 +318,24 @@ footer {
         padding-top: 6px;
     }
 
+    .displayInputPara::-webkit-scrollbar {
+        width: 10px;
+        height: 3px;
+        background-color: whitesmoke;
+    }
+    
+    .displayInputPara::-webkit-scrollbar-thumb {
+        /* width: 10px; */
+        /* height: 10px; */
+        background-color: rgb(165, 165, 165);
+        border-radius: 5px;
+    }
+    
+
     .displayResult {
         /* width: 155px; */
         min-width: 201px;
-        max-width: 390px;
+        max-width: 600px;
         height: 128px;
         /* border: 1px solid blue; */
         justify-content: flex-end;
@@ -319,8 +348,8 @@ footer {
     .displayResultPara {
         width: fit-content;
         min-width: 93px;
-        max-width: 414px;
-        height: 118px;
+        max-width: 600px;
+        height: 128px;
         margin: 0;
         /* display: flex; */
         align-items: flex-end;
@@ -336,32 +365,61 @@ footer {
         color: rgb(95, 95, 95);
     }
 
+    .displayResultPara::-webkit-scrollbar {
+        width: 10px;
+        height: 3px;
+        background-color: whitesmoke;
+    }
+    
+    .displayResultPara::-webkit-scrollbar-thumb {
+        /* width: 10px; */
+        /* height: 10px; */
+        background-color: rgb(165, 165, 165);
+        border-radius: 5px;
+    }
+
     .buttonContainer {
         display: flex;
         flex-wrap: wrap;
-        gap: 16px;
+        gap: 24px;
         justify-content: center;
         height: fit-content;
         flex: 1;
     }
 
     button {
-        width: 175.25px;
-        height: 206.39999999999998px;
+        width: 165.25px;
+        height: 197px;
         /* border: 1px solid rgb(95, 95, 95); */
         word-wrap: break-word;
         display: flex;
         justify-content: center;
         align-items: center;
         font-size: 52px;
-        border-radius: 10px;
+        border-radius: 14px;
         transition: all .08s ease;
         box-shadow: 6px 4px 8px #6161618f;
         background-color: rgb(218, 218, 218);
     }
 
-    #decimal, #equalSign {
-        width: 367px;
+    #decimal {
+        width: 165.25px;
+        height: 197px;
+        /* border: 1px solid rgb(95, 95, 95); */
+        word-wrap: break-word;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 72px;
+        border-radius: 14px;
+        transition: all .08s ease;
+        box-shadow: 6px 4px 8px #6161618f;
+        background-color: rgb(218, 218, 218);
+    }
+    
+
+    #clearAll, #equalSign {
+        width: 356px;
     }
 
     footer {
@@ -372,6 +430,13 @@ footer {
         justify-content: center;
         align-items: center;
         font-size: 40px;
+    }
+
+    .buttonPressEffect {
+        background-color: rgb(92, 92, 92);
+        color: white;
+        border-color: rgba(50, 63, 177, 0.616);
+        border-width: 1px;
     }
 
 }

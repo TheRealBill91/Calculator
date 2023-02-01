@@ -3,8 +3,12 @@ html {
     background-color: rgba(76, 88, 194, 0.493);
 }
 
+:root {
+    --default-font: 'Courier New', Courier, monospace, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
 html body {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: var(--default-font);
 
 }
 

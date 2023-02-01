@@ -12,7 +12,7 @@ body {
     margin: 0;
     /* This will cause the scrollbar to appear on the page (Do not want that in this project) */
     /* height: 100vh;   */
-   
+
 }
 
 .wrapper {
@@ -181,12 +181,6 @@ body {
 }
 
 
-.buttonPressEffect {
-    background-color: rgb(92, 92, 92);
-    color: white;
-    border-color: rgba(50, 63, 177, 0.616);
-    border-width: 1px;
-}
 
 button {
     width: 73.25px;
@@ -198,10 +192,24 @@ button {
     align-items: center;
     font-size: 24px;
     border-radius: 10px;
-    transition: all .08s ease;
+    transition: all .04s ease;
     box-shadow: 6px 4px 8px #6161618f;
     background-color: rgb(218, 218, 218);
 }
+
+button:active {
+    background-color: rgb(199, 199, 199);
+    color: rgba(50, 63, 177, 0.842);
+}
+
+.numberPad {
+    transition: all .08s ease-in-out;
+}
+
+/* button:hover {
+    transform: scale(1.01);
+    color: rgba(50, 63, 177, 0.842);
+} */
 
 #decimal {
     width: 73.25px;
@@ -270,7 +278,7 @@ footer {
         box-shadow: 10px 10px 8px #868686de;
         /* gap: 4px; */
     }
-    
+
     .displayOutputContainer {
         /* border: 1px solid rgb(166, 166, 166); */
         width: 739px;
@@ -323,14 +331,14 @@ footer {
         height: 3px;
         background-color: whitesmoke;
     }
-    
+
     .displayInputPara::-webkit-scrollbar-thumb {
         /* width: 10px; */
         /* height: 10px; */
         background-color: rgb(165, 165, 165);
         border-radius: 5px;
     }
-    
+
 
     .displayResult {
         /* width: 155px; */
@@ -370,7 +378,7 @@ footer {
         height: 3px;
         background-color: whitesmoke;
     }
-    
+
     .displayResultPara::-webkit-scrollbar-thumb {
         /* width: 10px; */
         /* height: 10px; */
@@ -400,7 +408,9 @@ footer {
         transition: all .08s ease;
         box-shadow: 6px 4px 8px #6161618f;
         background-color: rgb(218, 218, 218);
+        transition: cubic-bezier(0.165, 0.84, 0.44, 1);
     }
+
 
     #decimal {
         width: 165.25px;
@@ -416,9 +426,10 @@ footer {
         box-shadow: 6px 4px 8px #6161618f;
         background-color: rgb(218, 218, 218);
     }
-    
 
-    #clearAll, #equalSign {
+
+    #clearAll,
+    #equalSign {
         width: 356px;
     }
 
@@ -432,12 +443,13 @@ footer {
         font-size: 40px;
     }
 
-    .buttonPressEffect {
-        background-color: rgb(92, 92, 92);
-        color: white;
-        border-color: rgba(50, 63, 177, 0.616);
-        border-width: 1px;
-    }
+
 
 }
 
+@media only screen and (min-width: 1100px) {
+    button:hover {
+        background-color: rgb(218, 218, 218);
+        transform: scale(1.02);
+    }
+}

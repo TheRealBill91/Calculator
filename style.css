@@ -412,6 +412,7 @@ footer {
         transition: all .08s ease;
         box-shadow: 6px 4px 8px #6161618f;
         background-color: rgb(218, 218, 218);
+        color: rgb(48, 48, 48);
         transition: cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 

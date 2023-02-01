@@ -45,11 +45,6 @@ subtractionOperatorListen();
 equalOperatorListen();
 clearAllButtonListen();
 clearSingleValue();
-initializeMouseDown();
-initializeMouseUp();
-
-
-
 
 
 //clears the entire calculator memory

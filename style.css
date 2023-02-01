@@ -3,8 +3,12 @@ html {
     background-color: rgba(76, 88, 194, 0.493);
 }
 
+:root {
+    --default-font: 'Courier New', Courier, monospace, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
 html body {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: var(--default-font);
 
 }
 
@@ -12,7 +16,7 @@ body {
     margin: 0;
     /* This will cause the scrollbar to appear on the page (Do not want that in this project) */
     /* height: 100vh;   */
-   
+
 }
 
 .wrapper {
@@ -270,7 +274,7 @@ footer {
         box-shadow: 10px 10px 8px #868686de;
         /* gap: 4px; */
     }
-    
+
     .displayOutputContainer {
         /* border: 1px solid rgb(166, 166, 166); */
         width: 739px;
@@ -323,14 +327,14 @@ footer {
         height: 3px;
         background-color: whitesmoke;
     }
-    
+
     .displayInputPara::-webkit-scrollbar-thumb {
         /* width: 10px; */
         /* height: 10px; */
         background-color: rgb(165, 165, 165);
         border-radius: 5px;
     }
-    
+
 
     .displayResult {
         /* width: 155px; */
@@ -370,7 +374,7 @@ footer {
         height: 3px;
         background-color: whitesmoke;
     }
-    
+
     .displayResultPara::-webkit-scrollbar-thumb {
         /* width: 10px; */
         /* height: 10px; */
@@ -416,9 +420,10 @@ footer {
         box-shadow: 6px 4px 8px #6161618f;
         background-color: rgb(218, 218, 218);
     }
-    
 
-    #clearAll, #equalSign {
+
+    #clearAll,
+    #equalSign {
         width: 356px;
     }
 
@@ -440,4 +445,3 @@ footer {
     }
 
 }
-

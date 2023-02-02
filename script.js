@@ -624,13 +624,13 @@ function divide(...args) {
 function operate(symbol, numOne, numTwo) {
     switch (symbol) {
         case "+":
-            const addResult = add(numOne, numTwo);
+            const addResult = add(+numOne, +numTwo);
             return addResult;
         case "-":
-            const subtractResult = subtract(numOne, numTwo);
+            const subtractResult = subtract(+numOne, +numTwo);
             return subtractResult;
         case "X":
-            const multiplyResult = multiply(numOne, numTwo);
+            const multiplyResult = multiply(+numOne, +numTwo);
             return multiplyResult;
         case "/":
             const divideResult = divide(numOne, numTwo);

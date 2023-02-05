@@ -132,6 +132,7 @@ function equalOperation() {
             return;
         }
         allowDecimalPerInput = true; //allow user to enter decimal again
+        mustBeOperator = true; //prevent user from entering number (before operator) after operating and hitting equals
         displayHolder.push(+noComma);
         calcMemory.push(+noComma);
         let displayOperator = this.textContent;

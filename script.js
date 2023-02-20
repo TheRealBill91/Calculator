@@ -132,6 +132,7 @@ function equalOperation() {
             return;
         }
         allowDecimalPerInput = true; //allow user to enter decimal again
+        mustBeOperator = true; //prevent user from entering number (before operator) after operating and hitting equals
         displayHolder.push(+noComma);
         calcMemory.push(+noComma);
         let displayOperator = this.textContent;
@@ -624,13 +625,13 @@ function divide(...args) {
 function operate(symbol, numOne, numTwo) {
     switch (symbol) {
         case "+":
-            const addResult = add(numOne, numTwo);
+            const addResult = add(+numOne, +numTwo);
             return addResult;
         case "-":
-            const subtractResult = subtract(numOne, numTwo);
+            const subtractResult = subtract(+numOne, +numTwo);
             return subtractResult;
         case "X":
-            const multiplyResult = multiply(numOne, numTwo);
+            const multiplyResult = multiply(+numOne, +numTwo);
             return multiplyResult;
         case "/":
             const divideResult = divide(numOne, numTwo);

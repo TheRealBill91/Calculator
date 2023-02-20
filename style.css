@@ -54,7 +54,7 @@ body {
     justify-content: center;
     align-items: normal;
     flex-wrap: wrap;
-    background-color: rgba(50, 63, 177, 0.616);
+    background-color: rgba(50, 63, 177, 0.703);
     border-radius: 10px;
     box-shadow: 10px 10px 8px #868686de;
     /* gap: 4px; */
@@ -196,24 +196,24 @@ button {
     align-items: center;
     font-size: 24px;
     border-radius: 10px;
-    transition: all .04s ease;
+    transition: all .06s ease;
     box-shadow: 6px 4px 8px #6161618f;
     background-color: rgb(218, 218, 218);
 }
 
 button:active {
-    background-color: rgb(199, 199, 199);
-    color: rgba(50, 63, 177, 0.842);
+    background-color: rgb(190, 190, 190);
+    color: rgba(50, 63, 177, 0.703);
 }
 
 .numberPad {
     transition: all .08s ease-in-out;
 }
 
-/* button:hover {
-    transform: scale(1.01);
-    color: rgba(50, 63, 177, 0.842);
-} */
+button:hover {
+    /* background-color: rgb(218, 218, 218); */
+    transform: scale(1.02);
+}
 
 #decimal {
     width: 73.25px;
@@ -277,7 +277,7 @@ footer {
         justify-content: center;
         align-items: normal;
         flex-wrap: wrap;
-        background-color: rgba(50, 63, 177, 0.616);
+        background-color: rgba(50, 63, 177, 0.7);
         border-radius: 24px;
         box-shadow: 10px 10px 8px #868686de;
         /* gap: 4px; */
@@ -416,6 +416,11 @@ footer {
         transition: cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
+    button:active {
+        background-color: rgb(190, 190, 190);
+        color: rgba(50, 63, 177, 0.703);
+    }
+
 
     #decimal {
         width: 165.25px;
@@ -452,9 +457,3 @@ footer {
 
 }
 
-@media only screen and (min-width: 1100px) {
-    button:hover {
-        background-color: rgb(218, 218, 218);
-        transform: scale(1.02);
-    }
-}
